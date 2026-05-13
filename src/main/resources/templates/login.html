@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | INDIRA</title>
+
+    <link rel="stylesheet" href="/css/login.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="/javascript/login.js" defer></script>
+</head>
+<body>
+
+<section class="login-page">
+
+    <div class="overlay"></div>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="logo-section">
+                <img src="/images/logo.png" alt="Logo Indira">
+                <img src="/images/nombre.png" alt="Indira">
+            </div>
+
+            <span class="login-label">
+                Bienvenido nuevamente
+            </span>
+
+            <h1>Iniciar sesión</h1>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label for="correo">
+                        <i class="bi bi-envelope-fill"></i>
+                        Correo electrónico
+                    </label>
+
+                    <input type="email"
+                           id="correo"
+                           placeholder="correo@ejemplo.com"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">
+                        <i class="bi bi-lock-fill"></i>
+                        Contraseña
+                    </label>
+
+                    <div class="password-container">
+
+                        <input type="password"
+                               id="password"
+                               placeholder="Ingresa tu contraseña"
+                               required>
+
+                        <button type="button"
+                                class="toggle-password"
+                                id="togglePassword">
+
+                            <i class="bi bi-eye-fill"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="message-box"
+                     id="messageBox"></div>
+
+                <button type="submit"
+                        class="login-btn">
+
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Iniciar sesión
+
+                </button>
+
+            </form>
+
+            <p class="register-text">
+                ¿No tienes una cuenta?
+
+                <a href="/registro">
+                    Regístrate aquí
+                </a>
+            </p>
+
+            <a href="/"
+               class="back-home">
+
+                <i class="bi bi-arrow-left"></i>
+                Volver al inicio
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

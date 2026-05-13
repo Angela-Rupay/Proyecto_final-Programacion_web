@@ -1,0 +1,373 @@
+:root{
+    --color-principal:#12bcc4;
+    --color-principal-oscuro:#0ba4ad;
+    --color-azul-profundo:#082f3a;
+    --color-blanco:#ffffff;
+    --color-gris:#f5f7f8;
+    --color-texto:#333333;
+    --color-dorado:#c9a45c;
+    --color-success:#38b000;
+    --color-error:#ff4d6d;
+
+    --sombra-suave:0 8px 24px rgba(0,0,0,.12);
+    --sombra-fuerte:0 14px 40px rgba(0,0,0,.2);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    background-color:var(--color-gris);
+    color:var(--color-texto);
+}
+
+/* HEADER */
+
+.main-header{
+    width:100%;
+    min-height:88px;
+    padding:.7rem 4rem;
+    background:var(--color-principal);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    box-shadow:var(--sombra-suave);
+}
+
+.brand-section{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+}
+
+.logo-img{
+    width:78px;
+}
+
+.name-img{
+    width:230px;
+}
+
+.slogan-img{
+    width:310px;
+}
+
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:1.3rem;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:var(--color-blanco);
+    font-weight:600;
+}
+
+.logout-btn{
+    border:1px solid var(--color-blanco);
+    background:transparent;
+    color:var(--color-blanco);
+
+    padding:.5rem 1rem;
+    border-radius:30px;
+
+    font-family:inherit;
+    font-size:.95rem;
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    gap:.45rem;
+
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background-color:var(--color-blanco);
+    color:var(--color-principal-oscuro);
+}
+
+/* PAGE */
+
+.form-page{
+    padding:4rem 8%;
+    min-height:calc(100vh - 88px);
+}
+
+.form-header{
+    margin-bottom:2.5rem;
+}
+
+.form-header span{
+    color:var(--color-principal-oscuro);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.form-header h1{
+    font-size:3.1rem;
+    color:var(--color-azul-profundo);
+    margin:.6rem 0 1rem;
+}
+
+.form-header p{
+    font-size:1.05rem;
+    line-height:1.8;
+}
+
+.form-card{
+    max-width:850px;
+    background-color:var(--color-blanco);
+    border-radius:32px;
+    padding:2.5rem;
+    box-shadow:var(--sombra-suave);
+}
+
+#productForm{
+    display:flex;
+    flex-direction:column;
+    gap:1.3rem;
+}
+
+.input-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    gap:.7rem;
+}
+
+.input-group label{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    color:var(--color-azul-profundo);
+    font-weight:700;
+}
+
+.images-section{
+    margin-top:1rem;
+}
+
+.images-section h3{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    color:var(--color-azul-profundo);
+    margin-bottom:1rem;
+}
+
+.images-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1rem;
+}
+
+.image-upload{
+    background-color:var(--color-gris);
+    padding:1rem;
+    border-radius:24px;
+    display:flex;
+    flex-direction:column;
+    gap:.8rem;
+}
+
+.image-upload label{
+    font-weight:700;
+    color:var(--color-azul-profundo);
+}
+
+.image-upload input{
+    background-color:var(--color-blanco);
+}
+
+.preview-image{
+    width:100%;
+    height:240px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    background-color:#eee;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    border:none;
+    padding:1rem 1.1rem;
+    border-radius:18px;
+    background-color:var(--color-gris);
+    font-size:1rem;
+    outline:none;
+}
+
+.info-box{
+    display:flex;
+    gap:.8rem;
+    align-items:flex-start;
+
+    background-color:#e8fbfc;
+    color:var(--color-azul-profundo);
+
+    padding:1rem;
+    border-radius:18px;
+    line-height:1.6;
+}
+
+.info-box i{
+    color:var(--color-principal-oscuro);
+    font-size:1.2rem;
+    margin-top:.2rem;
+}
+
+.message-box{
+    display:none;
+    padding:1rem;
+    border-radius:18px;
+    font-weight:700;
+}
+
+.message-box.success{
+    display:block;
+    background-color:rgba(56,176,0,.12);
+    color:var(--color-success);
+}
+
+.message-box.error{
+    display:block;
+    background-color:rgba(255,77,109,.12);
+    color:var(--color-error);
+}
+
+.form-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:1rem;
+    margin-top:1rem;
+}
+
+.back-btn,
+.save-btn{
+    border:none;
+    text-decoration:none;
+    padding:1rem 1.4rem;
+    border-radius:40px;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+}
+
+.back-btn{
+    border:1px solid var(--color-principal);
+    color:var(--color-principal);
+    background-color:transparent;
+}
+
+.back-btn:hover{
+    background-color:var(--color-principal);
+    color:var(--color-blanco);
+}
+
+.save-btn{
+    background-color:var(--color-principal);
+    color:var(--color-blanco);
+}
+
+.save-btn:hover{
+    background-color:var(--color-principal-oscuro);
+    transform:translateY(-3px);
+}
+
+/* FOOTER */
+
+.footer{
+    background-color:var(--color-azul-profundo);
+    color:var(--color-blanco);
+    text-align:center;
+    padding:1.4rem;
+    margin-top:4rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+    .slogan-img{
+        display:none;
+    }
+}
+
+@media(max-width:850px){
+    .main-header{
+        flex-direction:column;
+        padding:1rem;
+    }
+
+    .navbar{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .form-page{
+        padding:2rem 1rem;
+    }
+
+    .form-card{
+        padding:1.5rem;
+    }
+
+    .input-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-buttons{
+        flex-direction:column;
+    }
+
+    .back-btn,
+    .save-btn{
+        justify-content:center;
+    }
+}
+
+@media(max-width:600px){
+    .logo-img{
+        width:60px;
+    }
+
+    .name-img{
+        width:185px;
+    }
+
+    .form-header h1{
+        font-size:2.3rem;
+    }
+
+    .images-grid{
+        grid-template-columns:1fr;
+    }
+}

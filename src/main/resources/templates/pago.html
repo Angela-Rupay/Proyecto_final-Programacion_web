@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago | INDIRA</title>
+
+    <link rel="stylesheet" href="/css/pago.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="/javascript/global.js" defer></script>
+    <script src="/javascript/pago.js" defer></script>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="brand-section">
+        <img src="/images/logo.png" alt="Logo" class="logo-img">
+        <img src="/images/nombre.png" alt="Nombre" class="name-img">
+        <img src="/images/slogan.png" alt="Slogan" class="slogan-img">
+    </div>
+
+    <nav class="navbar"></nav>
+</header>
+
+<main class="payment-page">
+
+    <section class="payment-header">
+        <span>Finalizar compra</span>
+        <h1>Pago seguro</h1>
+        <p>Ingresa los datos de la tarjeta para completar la transacción simulada.</p>
+    </section>
+
+    <section class="payment-layout">
+
+        <form class="payment-card" id="paymentForm">
+
+            <div class="input-group">
+                <label for="titular">
+                    <i class="bi bi-person-fill"></i>
+                    Nombre del titular
+                </label>
+                <input type="text" id="titular" placeholder="Nombre completo" required>
+            </div>
+
+            <div class="input-group">
+                <label for="tarjeta">
+                    <i class="bi bi-credit-card-fill"></i>
+                    Número de tarjeta
+                </label>
+                <input type="text" id="tarjeta" maxlength="19" placeholder="0000 0000 0000 0000" required>
+            </div>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="fecha">
+                        <i class="bi bi-calendar2-week-fill"></i>
+                        Vencimiento
+                    </label>
+                    <input type="text" id="fecha" maxlength="5" placeholder="MM/AA" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="cvv">
+                        <i class="bi bi-shield-lock-fill"></i>
+                        CVV
+                    </label>
+                    <input type="password" id="cvv" maxlength="3" placeholder="123" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="direccion">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Dirección de entrega
+                </label>
+                <input type="text" id="direccion" placeholder="Dirección de entrega" required>
+            </div>
+
+            <div class="message-box" id="messageBox"></div>
+
+            <div class="buttons">
+                <a href="/carrito" class="back-btn">
+                    <i class="bi bi-arrow-left"></i>
+                    Volver al carrito
+                </a>
+
+                <button type="submit" class="pay-btn" id="payBtn">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Completar transacción
+                </button>
+            </div>
+
+        </form>
+
+        <aside class="summary-card">
+            <i class="bi bi-bag-check-fill"></i>
+            <h2>Resumen</h2>
+            <p>La compra se registrará en tu historial y en el historial de ventas del administrador.</p>
+            <h3 id="summaryTotal">$0</h3>
+        </aside>
+
+    </section>
+
+</main>
+
+<div class="modal-overlay" id="successModal">
+    <div class="success-modal">
+        <i class="bi bi-check-circle-fill"></i>
+        <h2>Compra exitosa</h2>
+        <p>Tu compra fue registrada correctamente.</p>
+
+        <a href="/historial" class="modal-btn">
+            Ver historial
+        </a>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2026 Indira trajes típicos</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | INDIRA</title>
+
+    <link rel="stylesheet" href="/css/registro.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="/javascript/registro.js" defer></script>
+</head>
+<body>
+
+<section class="register-page">
+
+    <!-- PANEL IZQUIERDO -->
+
+    <div class="slider-section">
+
+        <div class="slider-overlay"></div>
+
+        <div class="slider-content">
+
+            <img src="/images/logo.png" alt="Logo INDIRA">
+
+            <h1>Tradición hecha arte</h1>
+
+            <p id="sliderText">
+                Cada vestido refleja la esencia cultural y artesanal del Sanjuanero Huilense.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- FORMULARIO -->
+
+    <div class="form-section">
+
+        <div class="form-container">
+
+            <span class="form-label">
+                Únete a INDIRA
+            </span>
+
+            <h2>Crear cuenta</h2>
+
+            <form id="registroForm">
+
+                <div class="input-grid">
+
+                    <div class="input-group">
+                        <label>
+                            <i class="bi bi-person-fill"></i>
+                            Nombre
+                        </label>
+
+                        <input type="text"
+                               id="nombre"
+                               placeholder="Angela"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>
+                            <i class="bi bi-person-fill"></i>
+                            Apellido
+                        </label>
+
+                        <input type="text"
+                               id="apellido"
+                               placeholder="Rojas"
+                               required>
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <i class="bi bi-credit-card-2-front-fill"></i>
+                        Número de cédula
+                    </label>
+
+                    <input type="text"
+                           id="documento"
+                           placeholder="1234567890"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <i class="bi bi-envelope-fill"></i>
+                        Correo electrónico
+                    </label>
+
+                    <input type="email"
+                           id="correo"
+                           placeholder="correo@ejemplo.com"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <i class="bi bi-telephone-fill"></i>
+                        Teléfono
+                    </label>
+
+                    <input type="text"
+                           id="telefono"
+                           placeholder="3XXXXXXXXX"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <i class="bi bi-lock-fill"></i>
+                        Contraseña
+                    </label>
+
+                    <div class="password-container">
+
+                        <input type="password"
+                               id="password"
+                               placeholder="Crea una contraseña segura"
+                               required>
+
+                        <button type="button"
+                                class="toggle-password"
+                                id="togglePassword">
+
+                            <i class="bi bi-eye-fill"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- VALIDACIONES -->
+
+                <div class="password-rules">
+
+                    <div class="rule" id="ruleLength">
+                        <i class="bi bi-circle"></i>
+                        Mínimo 8 caracteres
+                    </div>
+
+                    <div class="rule" id="ruleUppercase">
+                        <i class="bi bi-circle"></i>
+                        Al menos una mayúscula
+                    </div>
+
+                    <div class="rule" id="ruleNumber">
+                        <i class="bi bi-circle"></i>
+                        Al menos un número
+                    </div>
+
+                </div>
+
+                <div class="message-box"
+                     id="messageBox"></div>
+
+                <button type="submit"
+                        class="register-btn"
+                        id="registerBtn"
+                        disabled>
+
+                    <i class="bi bi-person-plus-fill"></i>
+                    Registrarme
+
+                </button>
+
+            </form>
+
+            <p class="login-link">
+                ¿Ya tienes una cuenta?
+
+                <a href="/login">
+                    Inicia sesión
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MODAL -->
+
+<div class="modal-overlay"
+     id="modalOverlay">
+
+    <div class="success-modal">
+
+        <i class="bi bi-check-circle-fill"></i>
+
+        <h2>Registro exitoso</h2>
+
+        <p>
+            Tu cuenta fue creada correctamente.
+        </p>
+
+        <div class="modal-buttons">
+
+            <a href="/catalogo"
+               class="modal-btn primary">
+
+                Ver catálogo
+
+            </a>
+
+            <a href="/"
+               class="modal-btn secondary">
+
+                Ir al inicio
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

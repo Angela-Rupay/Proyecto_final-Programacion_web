@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalle vestido | INDIRA</title>
+
+    <link rel="stylesheet" href="/css/detalle.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="/javascript/global.js" defer></script>
+    <script src="/javascript/detalle.js" defer></script>
+</head>
+<body>
+
+<header class="main-header">
+
+    <div class="brand-section">
+
+        <img src="/images/logo.png"
+             alt="Logo"
+             class="logo-img">
+
+        <img src="/images/nombre.png"
+             alt="Nombre"
+             class="name-img">
+
+        <img src="/images/slogan.png"
+             alt="Slogan"
+             class="slogan-img">
+
+    </div>
+
+    <nav class="navbar"></nav>
+
+</header>
+
+<main class="detail-page">
+
+    <section class="detail-container">
+
+        <!-- GALERÍA -->
+
+        <div class="gallery-section">
+
+            <div class="main-image-container">
+
+                <img id="mainImage"
+                     src="/images/logo.png"
+                     alt="Vestido principal"
+                     class="main-image">
+
+            </div>
+
+            <div class="thumbnails-container">
+
+                <img src="/images/logo.png"
+                     class="thumbnail active"
+                     alt="Miniatura 1">
+
+                <img src="/images/logo.png"
+                     class="thumbnail"
+                     alt="Miniatura 2">
+
+                <img src="/images/logo.png"
+                     class="thumbnail"
+                     alt="Miniatura 3">
+
+            </div>
+
+        </div>
+
+        <!-- INFORMACIÓN -->
+
+        <div class="info-section">
+
+            <span class="section-tag">
+                Traje típico de sanjuanero
+            </span>
+
+            <h1 id="vestidoNombre">
+                Cargando vestido...
+            </h1>
+
+            <div class="badges-container">
+
+                <span class="detail-badge model-badge"
+                      id="modeloBadge">
+
+                    Modelo
+
+                </span>
+
+                <span class="detail-badge size-badge"
+                      id="tallaBadge">
+
+                    Talla
+
+                </span>
+
+            </div>
+
+            <h2 class="price"
+                id="vestidoPrecio">
+
+                $0
+
+            </h2>
+
+            <!-- COLORES -->
+
+            <div class="colors-section">
+
+                <h3>
+
+                    <i class="bi bi-palette-fill"></i>
+
+                    Colores del diseño
+
+                </h3>
+
+                <div class="colors-container"
+                     id="colorsContainer"></div>
+
+            </div>
+
+            <!-- INFO EXTRA -->
+
+            <div class="detail-info">
+
+                <div class="info-item">
+
+                    <i class="bi bi-stars"></i>
+
+                    <div>
+                        <h4>Diseño artesanal</h4>
+                        <p>Confección tradicional hecha a mano.</p>
+                    </div>
+
+                </div>
+
+                <div class="info-item">
+
+                    <i class="bi bi-award-fill"></i>
+
+                    <div>
+                        <h4>Alta calidad</h4>
+                        <p>Materiales cuidadosamente seleccionados.</p>
+                    </div>
+
+                </div>
+
+                <div class="info-item">
+
+                    <i class="bi bi-heart-fill"></i>
+
+                    <div>
+                        <h4>Diseño exclusivo</h4>
+                        <p>Cada vestido es una pieza única.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BOTÓN -->
+
+            <button id="addToCartBtn"
+                    class="cart-btn">
+
+                <i class="bi bi-cart-fill"></i>
+
+                Agregar al carrito
+
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+
+    <div class="footer-socials">
+
+        <a href="#">
+            <i class="bi bi-facebook"></i>
+        </a>
+
+        <a href="#">
+            <i class="bi bi-instagram"></i>
+        </a>
+
+        <a href="#">
+            <i class="bi bi-tiktok"></i>
+        </a>
+
+    </div>
+
+    <p>
+        © 2026 Indira trajes típicos
+    </p>
+
+</footer>
+
+</body>
+</html>

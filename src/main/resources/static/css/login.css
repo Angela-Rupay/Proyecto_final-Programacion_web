@@ -1,0 +1,243 @@
+:root{
+    --color-principal:#12bcc4;
+    --color-principal-oscuro:#0ba4ad;
+    --color-azul-profundo:#082f3a;
+    --color-blanco:#ffffff;
+    --color-texto:#333333;
+    --color-error:#ff4d6d;
+    --color-success:#38b000;
+
+    --sombra-suave:0 8px 24px rgba(0,0,0,.12);
+    --sombra-fuerte:0 14px 40px rgba(0,0,0,.25);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+/* PAGE */
+
+.login-page{
+    min-height:100vh;
+    background:
+            linear-gradient(
+                    rgba(8,47,58,.72),
+                    rgba(8,47,58,.78)
+            ),
+            url("static/images/login-bg.jpg");
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:2rem;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    backdrop-filter:blur(3px);
+}
+
+/* CONTAINER */
+
+.login-container{
+    width:100%;
+    max-width:500px;
+    position:relative;
+    z-index:2;
+}
+
+.login-card{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(18px);
+    border-radius:32px;
+    padding:3rem 2.5rem;
+    box-shadow:var(--sombra-fuerte);
+    color:var(--color-blanco);
+}
+
+/* LOGO */
+
+.logo-section{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    margin-bottom:2rem;
+}
+
+.logo-section img:first-child{
+    width:82px;
+}
+
+.logo-section img:last-child{
+    width:220px;
+}
+
+/* TEXT */
+
+.login-label{
+    display:block;
+    text-align:center;
+    color:#d7f9fb;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:.8rem;
+    font-weight:700;
+}
+
+.login-card h1{
+    text-align:center;
+    font-size:2.6rem;
+    margin-bottom:2rem;
+}
+
+/* FORM */
+
+#loginForm{
+    display:flex;
+    flex-direction:column;
+    gap:1.4rem;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    gap:.7rem;
+}
+
+.input-group label{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    font-weight:600;
+}
+
+.input-group input{
+    width:100%;
+    border:none;
+    padding:1rem 1.1rem;
+    border-radius:18px;
+    background:rgba(255,255,255,.92);
+    color:var(--color-texto);
+    font-size:1rem;
+    outline:none;
+}
+
+.password-container{
+    position:relative;
+}
+
+.toggle-password{
+    position:absolute;
+    top:50%;
+    right:1rem;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:var(--color-principal-oscuro);
+    font-size:1.1rem;
+}
+
+/* MESSAGE */
+
+.message-box{
+    display:none;
+    padding:1rem;
+    border-radius:16px;
+    font-weight:600;
+}
+
+.message-box.error{
+    display:block;
+    background-color:rgba(255,77,109,.15);
+    border:1px solid rgba(255,77,109,.5);
+    color:#ffd6de;
+}
+
+.message-box.success{
+    display:block;
+    background-color:rgba(56,176,0,.15);
+    border:1px solid rgba(56,176,0,.5);
+    color:#d8ffd0;
+}
+
+/* BUTTON */
+
+.login-btn{
+    border:none;
+    background-color:var(--color-principal);
+    color:var(--color-blanco);
+    padding:1rem;
+    border-radius:40px;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:.8rem;
+}
+
+.login-btn:hover{
+    background-color:var(--color-principal-oscuro);
+    transform:translateY(-3px);
+}
+
+/* LINKS */
+
+.register-text{
+    margin-top:1.8rem;
+    text-align:center;
+    line-height:1.7;
+}
+
+.register-text a{
+    color:#d7f9fb;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.back-home{
+    margin-top:1.5rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:.6rem;
+    text-decoration:none;
+    color:var(--color-blanco);
+    font-weight:600;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+    .login-card{
+        padding:2.2rem 1.4rem;
+    }
+
+    .logo-section{
+        flex-direction:column;
+    }
+
+    .logo-section img:last-child{
+        width:180px;
+    }
+
+    .login-card h1{
+        font-size:2rem;
+    }
+
+}

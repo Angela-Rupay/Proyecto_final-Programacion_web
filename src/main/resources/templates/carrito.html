@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito | INDIRA</title>
+
+    <link rel="stylesheet" href="/css/carrito.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="/javascript/global.js" defer></script>
+    <script src="/javascript/carrito.js" defer></script>
+</head>
+<body>
+
+<header class="main-header">
+
+    <div class="brand-section">
+
+        <img src="/images/logo.png"
+             alt="Logo Indira"
+             class="logo-img">
+
+        <img src="/images/nombre.png"
+             alt="Indira"
+             class="name-img">
+
+        <img src="/images/slogan.png"
+             alt="Slogan"
+             class="slogan-img">
+
+    </div>
+
+    <nav class="navbar"></nav>
+
+</header>
+
+<main class="cart-container">
+
+    <section class="cart-header">
+
+        <span>Compras</span>
+
+        <h1>Tu carrito</h1>
+
+        <p>
+            Visualiza los vestidos seleccionados antes de finalizar tu compra.
+        </p>
+
+    </section>
+
+    <!-- TABLA -->
+
+    <section class="table-section" id="tableSection">
+
+        <div class="table-wrapper">
+
+            <table class="cart-table">
+
+                <thead>
+                <tr>
+                    <th>Vestido</th>
+                    <th>Modelo</th>
+                    <th>Talla</th>
+                    <th>Precio</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody id="cartBody"></tbody>
+
+            </table>
+
+        </div>
+
+        <div class="cart-summary">
+
+            <div class="summary-card">
+
+                <span>Total</span>
+
+                <h2 id="totalPrice">$0</h2>
+
+                <div class="summary-buttons">
+
+                    <a href="/historial"
+                       class="history-btn">
+
+                        <i class="bi bi-clock-history"></i>
+                        Historial
+
+                    </a>
+
+                    <button id="buyBtn"
+                            class="buy-btn">
+
+                        <i class="bi bi-credit-card-fill"></i>
+                        Realizar compra
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- VACÍO -->
+
+    <section class="empty-cart"
+             id="emptyCart">
+
+        <i class="bi bi-cart-x-fill"></i>
+
+        <h2>Tu carrito está vacío</h2>
+
+        <p>
+            Explora el catálogo y encuentra el vestido ideal para ti.
+        </p>
+
+        <a href="/catalogo">
+            Ver catálogo
+        </a>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>© 2026 Indira trajes típicos</p>
+</footer>
+
+</body>
+</html>

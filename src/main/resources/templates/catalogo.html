@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | INDIRA</title>
+
+    <link rel="stylesheet" href="/css/catalogo.css">
+
+    <link rel="stylesheet"
+           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="/javascript/catalogo.js"></script>
+    <script src="/javascript/global.js" defer></script>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="brand-section">
+        <img src="/images/logo.png" alt="Logo Indira" class="logo-img">
+        <img src="/images/nombre.png" alt="Indira Trajes Típicos" class="name-img">
+        <img src="/images/slogan.png" alt="Vive la tradición con elegancia" class="slogan-img">
+    </div>
+
+    <nav class="navbar">
+        <script src="/javascript/global.js" defer></script>
+    </nav>
+</header>
+
+<main>
+
+    <section class="catalog-hero">
+        <h1>Catálogo de vestidos</h1>
+        <p>Explora piezas únicas inspiradas en la tradición del Sanjuanero Huilense.</p>
+    </section>
+
+    <section class="catalog-layout">
+
+        <aside class="filters-panel">
+            <h2>Filtrar por modelo</h2>
+
+            <button class="filter-btn active" data-modelo="todos">
+                Todos
+            </button>
+
+            <button class="filter-btn" data-modelo="TT">
+                Tradicional
+            </button>
+
+            <button class="filter-btn" data-modelo="TF">
+                Fantasía
+            </button>
+
+            <button class="filter-btn" data-modelo="P">
+                Pintado
+            </button>
+
+            <button class="filter-btn" data-modelo="TPRO">
+                Profesional
+            </button>
+
+            <div class="model-info" id="modelInfo">
+                <h3>Todos los vestidos</h3>
+                <p>Visualiza todos los diseños disponibles actualmente.</p>
+            </div>
+        </aside>
+
+        <section class="products-section">
+            <div class="products-header">
+                <h2 id="catalogTitle">Vestidos disponibles</h2>
+                <span id="productCount">0 productos</span>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+
+            <div class="empty-message" id="emptyMessage">
+                <i class="bi bi-bag-heart"></i>
+                <h3>No hay vestidos disponibles</h3>
+                <p>Por ahora no existen productos para este modelo.</p>
+            </div>
+        </section>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>© 2026 Indira trajes típicos</p>
+</footer>
+</body>
+</html>

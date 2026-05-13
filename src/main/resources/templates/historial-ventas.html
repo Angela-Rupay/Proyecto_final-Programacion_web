@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de ventas | Admin</title>
+
+    <link rel="stylesheet" href="/css/historial-ventas.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="/javascript/global.js" defer></script>
+    <script src="/javascript/historial-ventas.js" defer></script>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="brand-section">
+        <img src="/images/logo.png" alt="Logo" class="logo-img">
+        <img src="/images/nombre.png" alt="Nombre" class="name-img">
+        <img src="/images/slogan.png" alt="Slogan" class="slogan-img">
+    </div>
+
+    <nav class="navbar"></nav>
+</header>
+
+<main class="sales-container">
+
+    <section class="sales-header">
+        <span>Administración</span>
+        <h1>Historial de ventas</h1>
+        <p>Consulta las compras realizadas por los clientes y revisa sus detalles.</p>
+    </section>
+
+    <section class="table-section" id="tableSection">
+        <div class="table-wrapper">
+            <table class="sales-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Documento</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody id="salesBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="empty-sales" id="emptySales">
+        <i class="bi bi-receipt-cutoff"></i>
+        <h2>Aún no hay ventas registradas</h2>
+        <p>Cuando un cliente complete una compra, aparecerá en esta sección.</p>
+    </section>
+
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="details-modal">
+
+        <button class="close-modal" id="closeModal">
+            <i class="bi bi-x-lg"></i>
+        </button>
+
+        <span>Detalle de venta</span>
+        <h2 id="modalTitle">Venta #1</h2>
+
+        <div class="details-container" id="detailsContainer"></div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2026 Indira trajes típicos</p>
+</footer>
+
+</body>
+</html>
