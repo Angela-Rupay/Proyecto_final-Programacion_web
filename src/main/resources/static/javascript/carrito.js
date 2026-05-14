@@ -17,6 +17,8 @@ async function cargarCarrito() {
         const response = await fetch(`/api/carrito/${usuario.documento}`);
         const items = await response.json();
 
+        console.log("Items carrito:", items);
+
         renderizarCarrito(items);
 
     } catch (error) {
@@ -58,7 +60,7 @@ function renderizarCarrito(items) {
                 </div>
             </td>
 
-            <td>${item.vestido.modelo.nombreModelo}</td>
+            <td>${item.vestido.modelo ? item.vestido.modelo.nombreModelo : "Sin modelo"}</td>
 
             <td>${item.vestido.talla}</td>
 

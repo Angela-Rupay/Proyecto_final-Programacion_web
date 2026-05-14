@@ -59,24 +59,73 @@ body {
     padding: 40px;
 }
 
-.overlay-presentacion{
-    max-width: 850px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(5px);
-    padding: 40px;
-    border-radius: 18px;
+.overlay-presentacion {
+    max-width: 950px;
+    background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.18),
+            rgba(255, 255, 255, 0.08)
+    );
+    backdrop-filter: blur(10px);
+    padding: 55px;
+    border-radius: 28px;
     text-align: center;
     color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+
+.overlay-presentacion::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    background:
+            rgba(255,79,135,0.28);
+
+    border-radius:50%;
+
+    top:-70px;
+    left:-70px;
+}
+
+.overlay-presentacion::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    background:
+            rgba(255,255,255,0.12);
+
+    border-radius:50%;
+
+    bottom:-60px;
+    right:-60px;
 }
 
 .overlay-presentacion h2{
-    font-size: 42px;
-    margin-bottom: 25px;
+    font-size: 48px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 2;
 }
 
 .overlay-presentacion p{
-    line-height: 1.9;
-    font-size: 18px;
+    line-height: 2;
+    font-size: 19px;
+    position: relative;
+    z-index: 2;
 }
 
 .brand-section {
@@ -363,15 +412,80 @@ section {
 /* SOBRE NOSOTROS */
 
 .about-section {
-    background-color: var(--color-blanco);
+    background:
+            linear-gradient(135deg, #e8fbfc 0%, #ffffff 45%, #fff7e8 100%);
     text-align: center;
+    padding: 5rem 8%;
+    position: relative;
+}
+
+.about-section::before {
+    content: "";
+    width: 120px;
+    height: 6px;
+    background: var(--color-dorado);
+    border-radius: 20px;
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .about-section p {
-    max-width: 900px;
-    margin: auto;
-    font-size: 1.08rem;
-    line-height: 1.9;
+    max-width: 950px;
+    margin: 2rem auto 0;
+    font-size: 1.15rem;
+    line-height: 2;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 28px;
+    box-shadow: var(--sombra-suave);
+    border-left: 6px solid var(--color-principal);
+}
+
+.about-section .section-title h2 {
+    color: var(--color-azul-profundo);
+    font-size: clamp(2.5rem, 5vw, 4.3rem);
+}
+
+.about-container{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:4rem;
+    align-items:center;
+    margin-top:4rem;
+}
+
+.about-content p{
+    max-width:700px;
+    margin-top:2rem;
+    font-size:1.15rem;
+    line-height:2;
+    background:white;
+    padding:2.5rem;
+    border-radius:28px;
+    box-shadow:var(--sombra-suave);
+    border-left:6px solid var(--color-principal);
+}
+
+.about-image{
+    position:relative;
+}
+
+.about-image img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    border-radius:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.18);
+}
+
+.about-container{
+    grid-template-columns:1fr;
+}
+
+.about-image img{
+    height:350px;
 }
 
 /* MODELOS */
@@ -492,6 +606,7 @@ section {
 }
 
 /* RESPONSIVE */
+
 
 @media (max-width: 1100px) {
     .main-header {

@@ -39,6 +39,19 @@ public class CarritoService {
             return new ApiResponse(false, "El vestido no está disponible");
         }
 
+        boolean yaExisteEnCarrito =
+                carritoItemRepository.existsByUsuario_DocumentoAndVestido_IdVestido(
+                        dto.getDocumento(),
+                        dto.getIdVestido()
+                );
+
+        if (yaExisteEnCarrito) {
+            return new ApiResponse(
+                    false,
+                    "Este vestido ya está en tu carrito"
+            );
+        }
+
         CarritoItem item = new CarritoItem();
         item.setUsuario(usuario);
         item.setVestido(vestido);

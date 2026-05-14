@@ -98,9 +98,9 @@ function renderizarVestidos(vestidos) {
 
         card.innerHTML = `
             <div class="product-img-container">
-                <img src="/images/vestidos/vestido-${vestido.idVestido}.jpg"
-                     alt="${vestido.nombre}"
-                     onerror="this.src='/images/logo.png'">
+               <img src="/images/vestidos/${vestido.idVestido}-1.jpg"
+                 alt="${vestido.nombre}"
+                 onerror="this.src='/images/logo.png'">
             </div>
 
             <div class="product-info">
