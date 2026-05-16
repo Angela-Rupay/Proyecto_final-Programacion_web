@@ -11,5 +11,12 @@ public interface VestidoRepository extends JpaRepository<Vestido, Long> {
 
     List<Vestido> findByModelo_IdModeloAndActivoTrue(String idModelo);
 
+    List<Vestido> findByTallaAndActivoTrue(String talla);
+
+    List<Vestido> findByModelo_IdModeloAndTallaAndActivoTrue(
+            String idModelo,
+            String talla
+    );
+
     boolean existsByIdVestidoAndActivoTrue(Long idVestido);
 }

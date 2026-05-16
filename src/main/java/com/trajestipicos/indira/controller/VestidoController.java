@@ -37,6 +37,25 @@ public class VestidoController {
     public List<Vestido> listarPorModelo(@PathVariable String idModelo) {
         return vestidoRepository.findByModelo_IdModeloAndActivoTrue(idModelo);
     }
+
+    @Operation(summary = "Obtener vestidos activos por talla")
+    @GetMapping("/talla/{talla}")
+    public List<Vestido> listarPorTalla(@PathVariable String talla) {
+        return vestidoRepository.findByTallaAndActivoTrue(talla);
+    }
+
+    @Operation(summary = "Obtener vestidos activos por modelo y talla")
+    @GetMapping("/modelo/{idModelo}/talla/{talla}")
+    public List<Vestido> listarPorModeloYTalla(
+            @PathVariable String idModelo,
+            @PathVariable String talla
+    ) {
+        return vestidoRepository.findByModelo_IdModeloAndTallaAndActivoTrue(
+                idModelo,
+                talla
+        );
+    }
+
     @Operation(summary = "Obtener detalle completo de un vestido")
     @GetMapping("/{idVestido}")
     public VestidoDetalleDTO detalleVestido(@PathVariable Long idVestido) {

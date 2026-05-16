@@ -4,6 +4,10 @@ const productCount = document.getElementById("productCount");
 const catalogTitle = document.getElementById("catalogTitle");
 const modelInfo = document.getElementById("modelInfo");
 const filterButtons = document.querySelectorAll(".filter-btn");
+const tallaFilter = document.getElementById("tallaFilter");
+
+let modeloSeleccionado = "todos";
+let tallaSeleccionada = "todos";
 
 const modelDescriptions = {
     todos: {
@@ -39,17 +43,46 @@ function configurarFiltros() {
             filterButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            const modelo = button.dataset.modelo;
+            modeloSeleccionado = button.dataset.modelo;
 
-            actualizarInfoModelo(modelo);
-
-            if (modelo === "todos") {
-                cargarVestidos();
-            } else {
-                cargarVestidosPorModelo(modelo);
-            }
+            actualizarInfoModelo(modeloSeleccionado);
+            cargarVestidosFiltrados();
         });
     });
+
+    tallaFilter.addEventListener("change", () => {
+        tallaSeleccionada = tallaFilter.value;
+        cargarVestidosFiltrados();
+    });
+}
+
+async function cargarVestidosFiltrados() {
+    try {
+        let url = "/api/vestidos";
+
+        if (modeloSeleccionado !== "todos" && tallaSeleccionada !== "todos") {
+            url = `/api/vestidos/modelo/${modeloSeleccionado}/talla/${tallaSeleccionada}`;
+            catalogTitle.textContent = `${modelDescriptions[modeloSeleccionado].title} - Talla ${tallaSeleccionada}`;
+        } else if (modeloSeleccionado !== "todos") {
+            url = `/api/vestidos/modelo/${modeloSeleccionado}`;
+            catalogTitle.textContent = modelDescriptions[modeloSeleccionado].title;
+        } else if (tallaSeleccionada !== "todos") {
+            url = `/api/vestidos/talla/${tallaSeleccionada}`;
+            catalogTitle.textContent = `Vestidos talla ${tallaSeleccionada}`;
+        } else {
+            url = "/api/vestidos";
+            catalogTitle.textContent = "Vestidos disponibles";
+        }
+
+        const response = await fetch(url);
+        const vestidos = await response.json();
+
+        renderizarVestidos(vestidos);
+
+    } catch (error) {
+        console.error("Error cargando vestidos filtrados:", error);
+        mostrarError();
+    }
 }
 
 async function cargarVestidos() {
