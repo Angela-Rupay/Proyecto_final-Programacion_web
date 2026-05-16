@@ -102,12 +102,6 @@ public class AdminVestidoController {
         );
     }
 
-    @Operation(summary = "Agregar color de flores a un vestido")
-    @PostMapping("/colores")
-    public ApiResponse agregarColor(@RequestBody VestidoColorDTO dto) {
-        return vestidoService.agregarColorAVestido(dto);
-    }
-
     @Operation(summary = "Desactivar un vestido del catálogo")
     @PatchMapping("/{idVestido}/desactivar")
     public ApiResponse desactivarVestido(@PathVariable Long idVestido) {

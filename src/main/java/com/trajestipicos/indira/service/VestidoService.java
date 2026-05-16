@@ -17,21 +17,15 @@ public class VestidoService {
 
     private final VestidoRepository vestidoRepository;
     private final ModeloRepository modeloRepository;
-    private final FloresColorRepository floresColorRepository;
-    private final VestidoFloresColorRepository vestidoFloresColorRepository;
 
     private static final Path CARPETA_IMAGENES = Path.of("uploads/vestidos");
 
     public VestidoService(
             VestidoRepository vestidoRepository,
-            ModeloRepository modeloRepository,
-            FloresColorRepository floresColorRepository,
-            VestidoFloresColorRepository vestidoFloresColorRepository
+            ModeloRepository modeloRepository
     ) {
         this.vestidoRepository = vestidoRepository;
         this.modeloRepository = modeloRepository;
-        this.floresColorRepository = floresColorRepository;
-        this.vestidoFloresColorRepository = vestidoFloresColorRepository;
     }
 
     public List<Vestido> listarTodos() {
@@ -81,19 +75,13 @@ public class VestidoService {
         Vestido vestido = vestidoRepository.findById(idVestido)
                 .orElseThrow(() -> new RuntimeException("Vestido no encontrado"));
 
-        List<String> colores = vestidoFloresColorRepository
-                .findByVestido_IdVestido(idVestido)
-                .stream()
-                .map(vc -> vc.getColor().getNombreColor())
-                .toList();
 
         return new VestidoDetalleDTO(
                 vestido.getIdVestido(),
                 vestido.getNombre(),
                 vestido.getTalla(),
                 vestido.getPrecioBase(),
-                vestido.getModelo().getNombreModelo(),
-                colores
+                vestido.getModelo().getNombreModelo()
         );
     }
 
@@ -156,21 +144,6 @@ public class VestidoService {
         return cambiarEstadoVestido(idVestido, true);
     }
 
-    public ApiResponse agregarColorAVestido(VestidoColorDTO dto) {
-        Vestido vestido = vestidoRepository.findById(dto.getIdVestido())
-                .orElseThrow(() -> new RuntimeException("Vestido no encontrado"));
-
-        FloresColor color = floresColorRepository.findById(dto.getIdColor())
-                .orElseThrow(() -> new RuntimeException("Color no encontrado"));
-
-        VestidoFloresColor relacion = new VestidoFloresColor();
-        relacion.setVestido(vestido);
-        relacion.setColor(color);
-
-        vestidoFloresColorRepository.save(relacion);
-
-        return new ApiResponse(true, "Color agregado al vestido correctamente");
-    }
 
     private void guardarImagenSiExiste(
             MultipartFile archivo,

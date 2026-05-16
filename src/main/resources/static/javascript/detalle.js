@@ -2,7 +2,6 @@ const vestidoNombre = document.getElementById("vestidoNombre");
 const modeloBadge = document.getElementById("modeloBadge");
 const tallaBadge = document.getElementById("tallaBadge");
 const vestidoPrecio = document.getElementById("vestidoPrecio");
-const colorsContainer = document.getElementById("colorsContainer");
 
 const mainImage = document.getElementById("mainImage");
 const thumbnails = document.querySelectorAll(".thumbnail");
@@ -55,27 +54,6 @@ async function cargarDetalleVestido() {
             No disponible
         `;
     }
-}
-
-function cargarColores(colores) {
-    colorsContainer.innerHTML = "";
-
-    if (!colores || colores.length === 0) {
-        colorsContainer.innerHTML = `
-            <span class="color-tag">
-                Sin colores registrados
-            </span>
-        `;
-        return;
-    }
-
-    colores.forEach(color => {
-        const tag = document.createElement("span");
-        tag.classList.add("color-tag");
-        tag.textContent = color;
-
-        colorsContainer.appendChild(tag);
-    });
 }
 
 function cargarImagenes(id) {

@@ -7,16 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.trajestipicos.indira.model.Modelo;
 import com.trajestipicos.indira.repository.ModeloRepository;
-import com.trajestipicos.indira.model.FloresColor;
-import com.trajestipicos.indira.repository.FloresColorRepository;
 
 @Configuration
 public class DataInitializer {
     @Bean
     CommandLineRunner initData(
             RolRepository rolRepository,
-            ModeloRepository modeloRepository,
-            FloresColorRepository floresColorRepository
+            ModeloRepository modeloRepository
 
     ) {
         return args -> {
@@ -49,23 +46,6 @@ public class DataInitializer {
 
             if (modeloRepository.findById("TT").isEmpty()) {
                 modeloRepository.save(new Modelo("TT", "Tradicional", null));
-            }
-            // COLORES DE FLORES
-            String[] colores = {
-                    "Amarillo", "Rojo", "Naranja", "Ocre", "Azul",
-                    "Verde", "Rosado", "Morado", "Negro"
-            };
-
-            for (String nombreColor : colores) {
-                boolean existe = floresColorRepository.findAll()
-                        .stream()
-                        .anyMatch(color -> color.getNombreColor().equalsIgnoreCase(nombreColor));
-
-                if (!existe) {
-                    FloresColor color = new FloresColor();
-                    color.setNombreColor(nombreColor);
-                    floresColorRepository.save(color);
-                }
             }
 
 
