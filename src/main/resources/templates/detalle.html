@@ -40,45 +40,40 @@
 
 <main class="detail-page">
 
-    <section class="detail-container">
+    <section class="detail-layout">
 
-        <!-- GALERÍA -->
+        <!-- MINIATURAS -->
+        <aside class="thumbs-column">
 
-        <div class="gallery-section">
+            <img src="/images/logo.png"
+                 class="thumbnail active"
+                 alt="Miniatura 1">
 
-            <div class="main-image-container">
+            <img src="/images/logo.png"
+                 class="thumbnail"
+                 alt="Miniatura 2">
 
-                <img id="mainImage"
-                     src="/images/logo.png"
-                     alt="Vestido principal"
-                     class="main-image">
+            <img src="/images/logo.png"
+                 class="thumbnail"
+                 alt="Miniatura 3">
 
-            </div>
+        </aside>
 
-            <div class="thumbnails-container">
+        <!-- IMAGEN PRINCIPAL -->
+        <section class="image-column">
 
-                <img src="/images/logo.png"
-                     class="thumbnail active"
-                     alt="Miniatura 1">
+            <img id="mainImage"
+                 src="/images/logo.png"
+                 alt="Vestido principal"
+                 class="main-image">
 
-                <img src="/images/logo.png"
-                     class="thumbnail"
-                     alt="Miniatura 2">
-
-                <img src="/images/logo.png"
-                     class="thumbnail"
-                     alt="Miniatura 3">
-
-            </div>
-
-        </div>
+        </section>
 
         <!-- INFORMACIÓN -->
-
-        <div class="info-section">
+        <section class="product-column">
 
             <span class="section-tag">
-                Traje típico de sanjuanero
+                Traje típico artesanal
             </span>
 
             <h1 id="vestidoNombre">
@@ -89,78 +84,70 @@
 
                 <span class="detail-badge model-badge"
                       id="modeloBadge">
-
                     Modelo
-
                 </span>
 
                 <span class="detail-badge size-badge"
                       id="tallaBadge">
-
                     Talla
-
                 </span>
 
             </div>
 
             <h2 class="price"
                 id="vestidoPrecio">
-
                 $0
-
             </h2>
 
-            <!-- COLORES -->
+            <div class="purchase-box">
+
+                <h3>Disponible</h3>
+
+                <p>
+                    Pieza única artesanal.
+                    Al completar la compra, el vestido dejará de estar disponible.
+                </p>
+
+                <button id="addToCartBtn"
+                        class="cart-btn">
+                    <i class="bi bi-cart-fill"></i>
+                    Agregar al carrito
+                </button>
+
+            </div>
 
             <div class="detail-info">
 
                 <div class="info-item">
-
                     <i class="bi bi-stars"></i>
 
                     <div>
                         <h4>Diseño artesanal</h4>
                         <p>Confección tradicional hecha a mano.</p>
                     </div>
-
                 </div>
 
                 <div class="info-item">
-
                     <i class="bi bi-award-fill"></i>
 
                     <div>
                         <h4>Alta calidad</h4>
                         <p>Materiales cuidadosamente seleccionados.</p>
                     </div>
-
                 </div>
 
                 <div class="info-item">
-
                     <i class="bi bi-heart-fill"></i>
 
                     <div>
                         <h4>Diseño exclusivo</h4>
                         <p>Cada vestido es una pieza única.</p>
                     </div>
-
                 </div>
 
             </div>
 
-            <!-- BOTÓN -->
-
-            <button id="addToCartBtn"
-                    class="cart-btn">
-
-                <i class="bi bi-cart-fill"></i>
-
-                Agregar al carrito
-
-            </button>
-
-        </div>
+        </section>
 
     </section>
 
