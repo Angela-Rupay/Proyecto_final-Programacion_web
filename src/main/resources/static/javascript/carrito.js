@@ -41,31 +41,31 @@ function renderizarCarrito(items) {
     let total = 0;
 
     items.forEach(item => {
-        total += Number(item.vestido.precioBase);
+        total += Number(item.precioBase);
 
         const fila = document.createElement("tr");
 
         fila.innerHTML = `
             <td>
                 <div class="product-info">
-                    <img src="/images/vestidos/${item.vestido.idVestido}-1.jpg"
-                         alt="${item.vestido.nombre}"
+                   <img src="/images/vestidos/${item.idVestido}-1.jpg"
+                        alt="${item.nombreVestido}"
                          onerror="this.src='/images/logo.png'">
 
                     <div>
                         <p class="product-name">
-                            ${item.vestido.nombre}
+                            ${item.nombreVestido}
                         </p>
                     </div>
                 </div>
             </td>
 
-            <td>${item.vestido.modelo ? item.vestido.modelo.nombreModelo : "Sin modelo"}</td>
+            <td>${item.modelo}</td>
 
-            <td>${item.vestido.talla}</td>
+            <td>${item.talla}</td>
 
             <td class="price">
-                ${formatearPrecio(item.vestido.precioBase)}
+                ${formatearPrecio(item.precioBase)}
             </td>
 
             <td>

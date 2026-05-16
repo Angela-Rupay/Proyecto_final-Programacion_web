@@ -29,7 +29,7 @@ async function cargarTotalCarrito() {
         }
 
         const total = items.reduce((sum, item) => {
-            return sum + Number(item.vestido.precioBase);
+            return sum + Number(item.precioBase);
         }, 0);
 
         summaryTotal.textContent = formatearPrecio(total);
@@ -69,6 +69,14 @@ paymentForm.addEventListener("submit", async (e) => {
     if (!validarFormulario()) return;
 
     const usuario = obtenerUsuarioLogueado();
+    const datosPago = {
+        documento: usuario.documento,
+        titular: titularInput.value.trim(),
+        numeroTarjeta: tarjetaInput.value.replace(/\s/g, ""),
+        fechaVencimiento: fechaInput.value.trim(),
+        cvv: cvvInput.value.trim(),
+        direccion: direccionInput.value.trim()
+    };
 
     try {
         payBtn.disabled = true;
@@ -180,13 +188,4 @@ function formatearPrecio(valor) {
         minimumFractionDigits:0
     }).format(valor);
 }
-
-const datosPago = {
-    documento: usuario.documento,
-    titular: titularInput.value.trim(),
-    numeroTarjeta: tarjetaInput.value.replace(/\s/g, ""),
-    fechaVencimiento: fechaInput.value.trim(),
-    cvv: cvvInput.value.trim(),
-    direccion: direccionInput.value.trim()
-};
 

@@ -36,8 +36,19 @@ public class CarritoController {
 
     @Operation(summary = "Consultar carrito de un usuario")
     @GetMapping("/{documento}")
-    public List<CarritoItem> obtenerCarrito(@PathVariable String documento) {
-        return carritoItemRepository.findByUsuario_Documento(documento);
+    public List<CarritoItemDTO> obtenerCarrito(@PathVariable String documento) {
+        return carritoItemRepository.findByUsuario_Documento(documento)
+                .stream()
+                .map(item -> new CarritoItemDTO(
+                        item.getUsuario().getDocumento(),
+                        item.getVestido().getIdVestido(),
+                        item.getIdCarritoItem(),
+                        item.getVestido().getNombre(),
+                        item.getVestido().getModelo().getNombreModelo(),
+                        item.getVestido().getTalla(),
+                        item.getVestido().getPrecioBase()
+                ))
+                .toList();
     }
 
     @Operation(summary = "Eliminar un producto del carrito")
