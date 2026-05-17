@@ -28,8 +28,57 @@ public class VestidoService {
         this.modeloRepository = modeloRepository;
     }
 
-    public List<Vestido> listarTodos() {
-        return vestidoRepository.findAll();
+    public List<VestidoListadoDTO> listarTodosDTO() {
+        return vestidoRepository.findAll()
+                .stream()
+                .map(this::convertirAListadoDTO)
+                .toList();
+    }
+
+    public List<VestidoListadoDTO> listarActivosDTO() {
+        return vestidoRepository.findByActivoTrue()
+                .stream()
+                .map(this::convertirAListadoDTO)
+                .toList();
+    }
+
+    public List<VestidoListadoDTO> listarActivosPorModeloDTO(String idModelo) {
+        return vestidoRepository.findByModelo_IdModeloAndActivoTrue(idModelo)
+                .stream()
+                .map(this::convertirAListadoDTO)
+                .toList();
+    }
+
+    public List<VestidoListadoDTO> listarActivosPorTallaDTO(String talla) {
+        return vestidoRepository.findByTallaAndActivoTrue(talla)
+                .stream()
+                .map(this::convertirAListadoDTO)
+                .toList();
+    }
+
+    public List<VestidoListadoDTO> listarActivosPorModeloYTallaDTO(
+            String idModelo,
+            String talla
+    ) {
+        return vestidoRepository.findByModelo_IdModeloAndTallaAndActivoTrue(
+                        idModelo,
+                        talla
+                )
+                .stream()
+                .map(this::convertirAListadoDTO)
+                .toList();
+    }
+
+    private VestidoListadoDTO convertirAListadoDTO(Vestido vestido) {
+        return new VestidoListadoDTO(
+                vestido.getIdVestido(),
+                vestido.getNombre(),
+                vestido.getTalla(),
+                vestido.getPrecioBase(),
+                vestido.getActivo(),
+                vestido.getModelo().getIdModelo(),
+                vestido.getModelo().getNombreModelo()
+        );
     }
 
     public ApiResponse crearVestido(VestidoRegistroDTO dto) {

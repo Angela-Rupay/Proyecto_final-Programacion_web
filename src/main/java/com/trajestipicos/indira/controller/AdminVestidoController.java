@@ -23,10 +23,9 @@ public class AdminVestidoController {
         this.vestidoService = vestidoService;
     }
 
-    @Operation(summary = "Listar todos los vestidos, activos e inactivos")
     @GetMapping
-    public List<Vestido> listarTodos() {
-        return vestidoService.listarTodos();
+    public List<VestidoListadoDTO> listarTodos() {
+        return vestidoService.listarTodosDTO();
     }
 
     @Operation(summary = "Crear un vestido")

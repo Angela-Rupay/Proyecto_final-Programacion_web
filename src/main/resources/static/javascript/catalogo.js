@@ -127,7 +127,7 @@ function renderizarVestidos(vestidos) {
 
                 <div class="product-details">
                     <span class="badge">Talla ${vestido.talla}</span>
-                    <span class="badge">${vestido.modelo.nombreModelo}</span>
+                    <span class="badge">${vestido.nombreModelo}</span>
                 </div>
 
                 <p class="price">${formatearPrecio(vestido.precioBase)}</p>

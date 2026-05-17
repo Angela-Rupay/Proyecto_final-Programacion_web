@@ -56,7 +56,7 @@ function renderizarProductos(productos) {
 
                 <div class="badges">
                     <span class="badge model">
-                        ${producto.modelo.nombreModelo}
+                        ${producto.nombreModelo}
                     </span>
 
                     <span class="badge ${activo ? "active" : "inactive"}">
