@@ -7,7 +7,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "rol")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rol {
@@ -20,5 +21,6 @@ public class Rol {
     private String tipoRol;
 
     @OneToMany(mappedBy = "rol")
+    @ToString.Exclude
     private List<Usuario> usuarios;
 }

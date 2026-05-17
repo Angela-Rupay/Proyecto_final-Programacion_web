@@ -43,7 +43,8 @@ public class SecurityConfig {
                                 "/carrito",
                                 "/historial",
                                 "/pago",
-                                "/sin-permisos"
+                                "/sin-permisos",
+                                "/error"
                         ).permitAll()
 
                         // ARCHIVOS ESTÁTICOS
@@ -101,6 +102,19 @@ public class SecurityConfig {
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
+                )
+
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(401);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"success\":false,\"message\":\"No autenticado\"}");
+                        })
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setStatus(403);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"success\":false,\"message\":\"No tienes permisos\"}");
+                        })
                 )
 
                 .build();

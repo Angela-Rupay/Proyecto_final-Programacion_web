@@ -5,7 +5,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "usuario")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
@@ -32,7 +33,6 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
+    @ToString.Exclude
     private Rol rol;
-
-
 }
