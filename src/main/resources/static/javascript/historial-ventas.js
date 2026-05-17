@@ -15,7 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function cargarVentas() {
     try {
-        const response = await fetch("/api/ventas");
+        const response = await fetch("/api/ventas", {
+            headers: obtenerHeadersAuth()
+        });
+
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
 
         if (!response.ok) {
             throw new Error("Error consultando ventas");
@@ -76,7 +82,13 @@ function renderizarVentas(ventas) {
 
 async function verDetalles(idVenta) {
     try {
-        const response = await fetch(`/api/ventas/${idVenta}`);
+        const response = await fetch(`/api/ventas/${idVenta}`, {
+            headers: obtenerHeadersAuth()
+        });
+
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
 
         if (!response.ok) {
             throw new Error("Error consultando detalle");

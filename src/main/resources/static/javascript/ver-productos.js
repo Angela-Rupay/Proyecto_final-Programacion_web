@@ -7,7 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function cargarProductos() {
     try {
-        const response = await fetch("/api/admin/vestidos");
+        const response = await fetch("/api/admin/vestidos", {
+            headers: obtenerHeadersAuth()
+        });
+
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
         const productos = await response.json();
 
         renderizarProductos(productos);
@@ -93,9 +99,12 @@ async function cambiarEstado(idProducto, activoActual) {
 
     try {
         const response = await fetch(endpoint, {
-            method: "PATCH"
+            method: "PATCH",
+            headers: obtenerHeadersAuth()
         });
-
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
         const data = await response.json();
 
         if (data.success) {

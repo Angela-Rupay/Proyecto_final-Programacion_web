@@ -66,6 +66,11 @@ public class ViewController {
         return "pago";
     }
 
+    @GetMapping("/sin-permisos")
+    public String sinPermisos() {
+        return "sin-permisos";
+    }
+
 
 
 }

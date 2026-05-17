@@ -10,6 +10,7 @@ import com.trajestipicos.indira.repository.RolRepository;
 import com.trajestipicos.indira.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.trajestipicos.indira.security.JwtService;
 
 @Service
 public class UsuarioService {
@@ -17,15 +18,18 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public UsuarioService(
             UsuarioRepository usuarioRepository,
             RolRepository rolRepository,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService
     ) {
         this.usuarioRepository = usuarioRepository;
         this.rolRepository = rolRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public ApiResponse registrarUsuario(RegistroDTO dto) {
@@ -69,6 +73,7 @@ public class UsuarioService {
                     null,
                     null,
                     null,
+                    null,
                     null
             );
         }
@@ -81,9 +86,12 @@ public class UsuarioService {
                     null,
                     null,
                     null,
+                    null,
                     null
             );
         }
+
+        String token = jwtService.generarToken(usuario);
 
         return new LoginResponseDTO(
                 true,
@@ -92,8 +100,8 @@ public class UsuarioService {
                 usuario.getNombre(),
                 usuario.getApellido(),
                 usuario.getCorreo(),
-                usuario.getRol().getTipoRol()
-
+                usuario.getRol().getTipoRol(),
+                token
         );
     }
 

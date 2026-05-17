@@ -99,20 +99,6 @@ async function cargarVestidos() {
     }
 }
 
-async function cargarVestidosPorModelo(idModelo) {
-    try {
-        const response = await fetch(`/api/vestidos/modelo/${idModelo}`);
-        const vestidos = await response.json();
-
-        catalogTitle.textContent = modelDescriptions[idModelo].title;
-        renderizarVestidos(vestidos);
-
-    } catch (error) {
-        console.error("Error cargando vestidos por modelo:", error);
-        mostrarError();
-    }
-}
-
 function renderizarVestidos(vestidos) {
     productsGrid.innerHTML = "";
 

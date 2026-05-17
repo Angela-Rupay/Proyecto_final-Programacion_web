@@ -1,3 +1,11 @@
+const params = new URLSearchParams(window.location.search);
+const mensajeUrl = params.get("mensaje");
+
+if (mensajeUrl === "login") {
+    mensaje.textContent = "Inicia sesión primero para continuar";
+    mensaje.classList.add("warning");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     configurarNavbar();
 });
@@ -63,15 +71,72 @@ function obtenerUsuarioLogueado() {
 function protegerPaginaCliente() {
     const usuario = obtenerUsuarioLogueado();
 
-    if (!usuario || usuario.rol !== "CLIENTE") {
-        window.location.href = "/login";
+    if (!usuario) {
+        window.location.href = "/login?mensaje=login";
+        return;
+    }
+
+    if (usuario.rol !== "CLIENTE") {
+        window.location.href = "/sin-permisos";
     }
 }
 
 function protegerPaginaAdmin() {
     const usuario = obtenerUsuarioLogueado();
 
-    if (!usuario || usuario.rol !== "ADMIN") {
-        window.location.href = "/login";
+    if (!usuario) {
+        window.location.href = "/login?mensaje=login";
+        return;
     }
+
+    if (usuario.rol !== "ADMIN") {
+        window.location.href = "/sin-permisos";
+    }
+
+}
+
+function obtenerToken() {
+    const usuario = obtenerUsuarioLogueado();
+
+    if (!usuario || !usuario.token) {
+        return null;
+    }
+
+    return usuario.token;
+}
+
+function obtenerHeadersAuth() {
+    const token = obtenerToken();
+
+    if (!token) {
+        return {};
+    }
+
+    return {
+        "Authorization": `Bearer ${token}`
+    };
+}
+function obtenerHeadersJsonAuth() {
+    const token = obtenerToken();
+    if (!token) {
+        return {
+            "Content-Type": "application/json"
+        };
+    }
+    return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    };
+}
+function manejarRespuestaNoAutorizada(response) {
+    if (response.status === 401) {
+        localStorage.removeItem("usuario");
+        window.location.href = "/login?mensaje=login";
+        return true;
+    }
+    if (response.status === 403) {
+        window.location.href = "/sin-permisos";
+        return true;
+    }
+    return false;
 }

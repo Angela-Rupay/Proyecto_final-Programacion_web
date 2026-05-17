@@ -1,0 +1,130 @@
+:root{
+    --color-principal:#12bcc4;
+    --color-principal-oscuro:#0ba4ad;
+    --color-azul-profundo:#082f3a;
+    --color-blanco:#ffffff;
+    --color-gris:#f5f7f8;
+    --color-dorado:#c9a45c;
+    --sombra-suave:0 8px 24px rgba(0,0,0,.12);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:
+            linear-gradient(135deg, #e8fbfc 0%, #ffffff 50%, #fff7e8 100%);
+    color:var(--color-azul-profundo);
+}
+
+.main-header{
+    width:100%;
+    min-height:88px;
+    padding:.7rem 4rem;
+    background:var(--color-principal);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:var(--sombra-suave);
+}
+
+.brand-section{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+}
+
+.logo-img{
+    width:78px;
+}
+
+.name-img{
+    width:230px;
+}
+
+.slogan-img{
+    width:310px;
+}
+
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:1.3rem;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:var(--color-blanco);
+    font-weight:600;
+}
+
+.permission-page{
+    min-height:calc(100vh - 88px - 70px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:3rem 1rem;
+}
+
+.permission-card{
+    max-width:620px;
+    background:white;
+    padding:3rem;
+    border-radius:32px;
+    text-align:center;
+    box-shadow:var(--sombra-suave);
+}
+
+.permission-card > i{
+    font-size:4rem;
+    color:var(--color-dorado);
+}
+
+.permission-card h1{
+    margin:1.5rem 0 1rem;
+    font-size:2.6rem;
+}
+
+.permission-card p{
+    line-height:1.8;
+    margin-bottom:2rem;
+}
+
+.home-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    padding:1rem 1.4rem;
+    border-radius:40px;
+    background:var(--color-principal);
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.footer{
+    background-color:var(--color-azul-profundo);
+    color:white;
+    text-align:center;
+    padding:1.4rem;
+}
+
+@media(max-width:900px){
+    .main-header{
+        flex-direction:column;
+        padding:1rem;
+        gap:1rem;
+    }
+
+    .slogan-img{
+        display:none;
+    }
+
+    .permission-card{
+        padding:2rem;
+    }
+}

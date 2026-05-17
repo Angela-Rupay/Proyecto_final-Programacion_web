@@ -105,14 +105,16 @@ function configurarBotonCarrito() {
         try {
             const response = await fetch("/api/carrito/agregar", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: obtenerHeadersJsonAuth(),
                 body: JSON.stringify({
                     documento: usuario.documento,
                     idVestido: Number(idVestido)
                 })
             });
+
+            if (manejarRespuestaNoAutorizada(response)) {
+                return;
+            }
 
             const data = await response.json();
 

@@ -14,7 +14,12 @@ async function cargarCarrito() {
     const usuario = obtenerUsuarioLogueado();
 
     try {
-        const response = await fetch(`/api/carrito/${usuario.documento}`);
+        const response = await fetch(`/api/carrito/${usuario.documento}`, {
+            headers: obtenerHeadersAuth()
+        });
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
         const items = await response.json();
 
         console.log("Items carrito:", items);
@@ -86,9 +91,13 @@ function renderizarCarrito(items) {
 async function eliminarItem(idItem) {
     try {
         const response = await fetch(`/api/carrito/${idItem}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: obtenerHeadersAuth()
         });
 
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
         const data = await response.json();
 
         if (data.success) {

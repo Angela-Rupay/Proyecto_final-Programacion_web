@@ -87,11 +87,13 @@ paymentForm.addEventListener("submit", async (e) => {
 
         const response = await fetch("/api/pago/procesar", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: obtenerHeadersJsonAuth(),
             body: JSON.stringify(datosPago)
         });
+
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
 
         const data = await response.json();
 

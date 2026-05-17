@@ -16,7 +16,13 @@ async function cargarHistorial() {
     const usuario = obtenerUsuarioLogueado();
 
     try {
-        const response = await fetch(`/api/ventas/cliente/${usuario.documento}`);
+        const response = await fetch(`/api/ventas/cliente/${usuario.documento}`, {
+            headers: obtenerHeadersAuth()
+        });
+
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
 
         if (!response.ok) {
             throw new Error("Error consultando historial");
@@ -75,13 +81,19 @@ function renderizarHistorial(ventas) {
 
 async function verDetalles(idVenta) {
     try {
-        const response = await fetch(`/api/ventas/${idVenta}`);
+        const response = await fetch(`/api/ventas/cliente/${usuario.documento}`, {
+            headers: obtenerHeadersAuth()
+        });
 
-        if (!response.ok) {
-            throw new Error("Error consultando detalle");
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
         }
 
-        const detalles = await response.json();
+        if (!response.ok) {
+            throw new Error("Error consultando historial");
+        }
+
+        const ventas = await response.json();
 
         detailsContainer.innerHTML = "";
         modalTitle.textContent = `Venta #${idVenta}`;
