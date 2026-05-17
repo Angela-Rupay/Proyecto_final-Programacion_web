@@ -20,7 +20,14 @@ async function cargarTotalCarrito() {
     const usuario = obtenerUsuarioLogueado();
 
     try {
-        const response = await fetch(`/api/carrito/${usuario.documento}`);
+        const response = await fetch(`/api/carrito/${usuario.documento}`, {
+            headers: obtenerHeadersAuth()
+        });
+
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
+
         const items = await response.json();
 
         if (!items || items.length === 0) {
