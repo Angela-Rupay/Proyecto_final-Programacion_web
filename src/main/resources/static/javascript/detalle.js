@@ -37,7 +37,6 @@ async function cargarDetalleVestido() {
         tallaBadge.textContent = `Talla ${vestido.talla}`;
         vestidoPrecio.textContent = formatearPrecio(vestido.precioBase);
 
-        cargarColores(vestido.colores);
         cargarImagenes(idVestido);
 
     } catch (error) {
