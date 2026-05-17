@@ -228,9 +228,13 @@ async function crearProducto(formData){
                 "/api/admin/vestidos/con-imagenes",
                 {
                     method:"POST",
+                    headers: obtenerHeadersAuth(),
                     body:formData
                 }
             );
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
 
         const data =
             await response.json();
@@ -281,12 +285,16 @@ async function actualizarProducto(formData){
                 `/api/admin/vestidos/${idProducto}/con-imagenes`,
                 {
                     method:"PUT",
+                    headers: obtenerHeadersAuth(),
                     body:formData
                 }
             );
 
         const data =
             await response.json();
+        if (manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
 
         if(data.success){
 
@@ -331,39 +339,38 @@ async function actualizarProducto(formData){
 function validarFormulario(){
 
     if(!nombreInput.value.trim()){
-
         mostrarMensaje(
             "Ingresa el nombre del vestido",
             "error"
         );
-
         return false;
-
     }
 
     if(!tallaInput.value.trim()){
-
         mostrarMensaje(
             "Ingresa la talla del vestido",
             "error"
         );
-
         return false;
-
     }
-
     if(
         !precioBaseInput.value ||
         Number(precioBaseInput.value) <= 0
     ){
-
         mostrarMensaje(
             "El precio debe ser mayor a cero",
             "error"
         );
+        return false;
+    }
+    if (Number(precioBaseInput.value) % 10000 !== 0) {
+
+        mostrarMensaje(
+            "El precio debe ser un valor cerrado, por ejemplo 120000 o 250000",
+            "error"
+        );
 
         return false;
-
     }
 
     if(!idModeloInput.value){
