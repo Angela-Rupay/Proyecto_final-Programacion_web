@@ -228,6 +228,14 @@ body{
     background-color:var(--color-principal-oscuro);
 }
 
+.cart-btn.disabled,
+.cart-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    background-color:#9aa4a6;
+    transform:none;
+}
+
 /* INFO EXTRA */
 
 .detail-info{

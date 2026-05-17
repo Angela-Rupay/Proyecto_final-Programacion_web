@@ -89,16 +89,32 @@ function configurarGaleria() {
 }
 
 function configurarBotonCarrito() {
+
+    const usuario = obtenerUsuarioLogueado();
+
+    if (usuario && usuario.rol === "ADMIN") {
+        addToCartBtn.disabled = true;
+
+        addToCartBtn.innerHTML = `
+            <i class="bi bi-shield-lock-fill"></i>
+            Solo clientes pueden comprar
+        `;
+
+        addToCartBtn.classList.add("disabled");
+        return;
+    }
+
     addToCartBtn.addEventListener("click", async () => {
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+        const usuario = obtenerUsuarioLogueado();
 
         if (!usuario) {
-            window.location.href = "/login";
+            window.location.href = "/login?mensaje=login";
             return;
         }
 
-        if (usuario.rol === "ADMIN") {
-            alert("El administrador no puede agregar productos al carrito");
+        if (usuario.rol !== "CLIENTE") {
+            window.location.href = "/sin-permisos";
             return;
         }
 
@@ -138,7 +154,6 @@ function configurarBotonCarrito() {
         }
     });
 }
-
 function formatearPrecio(valor) {
     return new Intl.NumberFormat("es-CO", {
         style: "currency",

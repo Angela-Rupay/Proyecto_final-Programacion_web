@@ -1,13 +1,14 @@
-const params = new URLSearchParams(window.location.search);
-const mensajeUrl = params.get("mensaje");
-
-if (mensajeUrl === "login") {
-    mensaje.textContent = "Inicia sesión primero para continuar";
-    mensaje.classList.add("warning");
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     configurarNavbar();
+    const messageBox = document.getElementById("messageBox");
+
+    const params = new URLSearchParams(window.location.search);
+    const mensajeUrl = params.get("mensaje");
+
+    if (mensajeUrl === "login" && messageBox) {
+        messageBox.textContent = "Inicia sesión primero para continuar";
+        messageBox.classList.add("error");
+    }
 });
 
 function configurarNavbar() {
@@ -81,6 +82,7 @@ function protegerPaginaCliente() {
     }
 }
 
+
 function protegerPaginaAdmin() {
     const usuario = obtenerUsuarioLogueado();
 
@@ -92,7 +94,6 @@ function protegerPaginaAdmin() {
     if (usuario.rol !== "ADMIN") {
         window.location.href = "/sin-permisos";
     }
-
 }
 
 function obtenerToken() {

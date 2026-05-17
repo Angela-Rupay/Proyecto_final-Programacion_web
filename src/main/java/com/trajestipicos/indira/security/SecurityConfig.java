@@ -29,43 +29,71 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+                        // VISTAS PÚBLICAS
                         .requestMatchers(
                                 "/",
                                 "/catalogo",
                                 "/detalle",
                                 "/login",
                                 "/registro",
-
-                                "/css/**",
-                                "/javascript/**",
-                                "/images/**",
-
-                                "/swagger-ui.html",
-                                "/swagger-ui/**",
-                                "/api-docs",
-                                "/api-docs/**",
-
-                                "/api/auth/**",
-                                "/api/vestidos",
-                                "/api/vestidos/**"
-                        ).permitAll()
-
-                        .requestMatchers(
                                 "/admin",
                                 "/ver-productos",
                                 "/crear-producto",
                                 "/historial-ventas",
-                                "/api/admin/**"
-                        ).hasRole("ADMIN")
-
-                        .requestMatchers(
                                 "/carrito",
                                 "/historial",
                                 "/pago",
+                                "/sin-permisos"
+                        ).permitAll()
+
+                        // ARCHIVOS ESTÁTICOS
+                        .requestMatchers(
+                                "/css/**",
+                                "/javascript/**",
+                                "/images/**"
+                        ).permitAll()
+
+                        // SWAGGER
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/api-docs",
+                                "/api-docs/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+
+                        // AUTH
+                        .requestMatchers(
+                                "/api/auth/**"
+                        ).permitAll()
+
+                        // CATÁLOGO PÚBLICO
+                        .requestMatchers(
+                                "/api/vestidos",
+                                "/api/vestidos/**"
+                        ).permitAll()
+
+                        // APIs SOLO ADMIN
+                        .requestMatchers(
+                                "/api/admin/**"
+                        ).hasRole("ADMIN")
+
+                        // APIs SOLO CLIENTE
+                        .requestMatchers(
                                 "/api/carrito/**",
-                                "/api/ventas/**",
                                 "/api/pago/**"
                         ).hasRole("CLIENTE")
+
+                        // VENTAS: cliente compra, admin consulta historial general
+                        .requestMatchers(
+                                "/api/ventas/comprar/**",
+                                "/api/ventas/cliente/**"
+                        ).hasRole("CLIENTE")
+
+                        .requestMatchers(
+                                "/api/ventas",
+                                "/api/ventas/**"
+                        ).hasAnyRole("ADMIN", "CLIENTE")
 
                         .anyRequest().authenticated()
                 )

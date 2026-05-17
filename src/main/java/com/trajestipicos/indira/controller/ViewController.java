@@ -11,11 +11,6 @@ public class ViewController {
         return "index";
     }
 
-    @GetMapping("/catalogo")
-    public String catalogo() {
-        return "catalogo";
-    }
-
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -24,6 +19,21 @@ public class ViewController {
     @GetMapping("/registro")
     public String registro() {
         return "registro";
+    }
+
+    @GetMapping("/catalogo")
+    public String catalogo() {
+        return "catalogo";
+    }
+
+    @GetMapping("/detalle")
+    public String detalle() {
+        return "detalle";
+    }
+
+    @GetMapping("/sin-permisos")
+    public String sinPermisos() {
+        return "sin-permisos";
     }
 
     @GetMapping("/carrito")
@@ -36,19 +46,14 @@ public class ViewController {
         return "historial";
     }
 
-    @GetMapping("/detalle")
-    public String detalle() {
-        return "detalle";
+    @GetMapping("/pago")
+    public String pago() {
+        return "pago";
     }
 
     @GetMapping("/admin")
     public String admin() {
         return "admin";
-    }
-
-    @GetMapping("/ver-productos")
-    public String verProductos() {
-        return "ver-productos";
     }
 
     @GetMapping("/crear-producto")
@@ -61,16 +66,9 @@ public class ViewController {
         return "historial-ventas";
     }
 
-    @GetMapping("/pago")
-    public String pago() {
-        return "pago";
+    @GetMapping("/ver-productos")
+    public String verProductos() {
+        return "ver-productos";
     }
-
-    @GetMapping("/sin-permisos")
-    public String sinPermisos() {
-        return "sin-permisos";
-    }
-
-
 
 }
