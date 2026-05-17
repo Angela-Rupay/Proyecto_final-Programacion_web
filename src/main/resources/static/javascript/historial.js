@@ -81,7 +81,7 @@ function renderizarHistorial(ventas) {
 
 async function verDetalles(idVenta) {
     try {
-        const response = await fetch(`/api/ventas/cliente/${usuario.documento}`, {
+        const response = await fetch(`/api/ventas/${idVenta}`, {
             headers: obtenerHeadersAuth()
         });
 
@@ -90,10 +90,10 @@ async function verDetalles(idVenta) {
         }
 
         if (!response.ok) {
-            throw new Error("Error consultando historial");
+            throw new Error("Error consultando detalle de venta");
         }
 
-        const ventas = await response.json();
+        const detalles = await response.json();
 
         detailsContainer.innerHTML = "";
         modalTitle.textContent = `Venta #${idVenta}`;
