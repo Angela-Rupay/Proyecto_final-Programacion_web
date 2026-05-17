@@ -178,6 +178,18 @@ body{
     margin-bottom:1.3rem;
 }
 
+.badge.sold {
+    background-color: rgba(80, 80, 80, .14);
+    color: #555;
+}
+
+.toggle-btn.sold {
+    background-color: #d9d9d9;
+    color: #777;
+    cursor: not-allowed;
+    opacity: .85;
+}
+
 /* BUTTONS */
 
 .buttons{

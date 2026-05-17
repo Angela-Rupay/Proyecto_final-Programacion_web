@@ -40,6 +40,80 @@ function renderizarProductos(productos) {
 
     productos.forEach(producto => {
         const activo = producto.activo;
+        const vendido = producto.vendido;
+
+        const textoEstado = vendido
+            ? "Vendido"
+            : activo
+                ? "Disponible"
+                : "No disponible";
+
+        const claseEstado = vendido
+            ? "sold"
+            : activo
+                ? "active"
+                : "inactive";
+
+        const botonEstado = vendido
+            ? `
+                <button class="toggle-btn sold" disabled>
+                    <i class="bi bi-lock-fill"></i>
+                    Vendido
+                </button>
+            `
+            : `
+                <button class="toggle-btn ${activo ? "disable" : "enable"}"
+                        onclick="cambiarEstado(${producto.idVestido}, ${activo})">
+                    <i class="bi ${activo ? "bi-x-circle-fill" : "bi-check-circle-fill"}"></i>
+                    ${activo ? "Desactivar" : "Activar"}
+                </button>
+            `;
+
+        const card = document.createElement("article");
+        card.classList.add("product-card");
+
+        card.innerHTML = `
+            <div class="product-image">
+                <img src="/images/vestidos/${producto.idVestido}-1.jpg"
+                     alt="${producto.nombre}"
+                     onerror="this.src='/images/logo.png'">
+            </div>
+
+            <div class="product-content">
+                <h2>${producto.nombre}</h2>
+
+                <div class="badges">
+                    <span class="badge model">
+                        ${producto.nombreModelo}
+                    </span>
+
+                    <span class="badge ${claseEstado}">
+                        ${textoEstado}
+                    </span>
+                </div>
+
+                <p class="price">
+                    ${formatearPrecio(producto.precioBase)}
+                </p>
+
+                <div class="buttons">
+                    <button class="edit-btn"
+                            onclick="editarProducto(${producto.idVestido})">
+                        <i class="bi bi-pencil-fill"></i>
+                        Editar
+                    </button>
+
+                    ${botonEstado}
+                </div>
+            </div>
+        `;
+
+        productsGrid.appendChild(card);
+    });
+}
+
+    productos.forEach(producto => {
+        const activo = producto.activo;
 
         const card = document.createElement("article");
         card.classList.add("product-card");
@@ -86,7 +160,7 @@ function renderizarProductos(productos) {
 
         productsGrid.appendChild(card);
     });
-}
+
 
 function editarProducto(idProducto) {
     window.location.href = `/crear-producto?id=${idProducto}`;

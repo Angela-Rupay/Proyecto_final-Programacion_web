@@ -17,4 +17,6 @@ public class VestidoListadoDTO {
 
     private String idModelo;
     private String nombreModelo;
+
+    private Boolean vendido;
 }

@@ -17,15 +17,18 @@ public class VestidoService {
 
     private final VestidoRepository vestidoRepository;
     private final ModeloRepository modeloRepository;
+    private final DetalleVentaRepository detalleVentaRepository;
 
     private static final Path CARPETA_IMAGENES = Path.of("uploads/vestidos");
 
     public VestidoService(
             VestidoRepository vestidoRepository,
-            ModeloRepository modeloRepository
+            ModeloRepository modeloRepository,
+            DetalleVentaRepository detalleVentaRepository
     ) {
         this.vestidoRepository = vestidoRepository;
         this.modeloRepository = modeloRepository;
+        this.detalleVentaRepository = detalleVentaRepository;
     }
 
     public List<VestidoListadoDTO> listarTodosDTO() {
@@ -70,6 +73,11 @@ public class VestidoService {
     }
 
     private VestidoListadoDTO convertirAListadoDTO(Vestido vestido) {
+
+        boolean vendido = detalleVentaRepository.existsByVestido_IdVestido(
+                vestido.getIdVestido()
+        );
+
         return new VestidoListadoDTO(
                 vestido.getIdVestido(),
                 vestido.getNombre(),
@@ -77,7 +85,8 @@ public class VestidoService {
                 vestido.getPrecioBase(),
                 vestido.getActivo(),
                 vestido.getModelo().getIdModelo(),
-                vestido.getModelo().getNombreModelo()
+                vestido.getModelo().getNombreModelo(),
+                vendido
         );
     }
 
@@ -190,6 +199,16 @@ public class VestidoService {
     }
 
     public ApiResponse activarVestido(Long idVestido) {
+
+        boolean fueVendido = detalleVentaRepository.existsByVestido_IdVestido(idVestido);
+
+        if (fueVendido) {
+            return new ApiResponse(
+                    false,
+                    "Este vestido ya fue vendido y no puede volver a activarse"
+            );
+        }
+
         return cambiarEstadoVestido(idVestido, true);
     }
 
