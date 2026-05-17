@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     configurarPassword();
     validarPassword();
     configurarValidaciones();
+    configurarSliderSanjuanero();
 });
 
 function configurarPassword(){
@@ -161,4 +162,62 @@ function mostrarMensaje(texto){
 
 function ocultarMensaje(){
     messageBox.className = "message-box";
+}
+
+function configurarSliderSanjuanero() {
+
+    const sliderImage = document.getElementById("sliderImage");
+    const sliderTitle = document.getElementById("sliderTitle");
+    const sliderDots = document.getElementById("sliderDots");
+
+    if (!sliderImage || !sliderTitle || !sliderDots) return;
+
+    const figuras = [
+        { imagen: "/images/invitacion.jpg", titulo: "Invitación" },
+        { imagen: "/images/ocho.jpg", titulo: "Los ochos" },
+        { imagen: "/images/coqueteo.jpg", titulo: "El coqueteo" },
+        { imagen: "/images/arrodillada.jpg", titulo: "La arrodillada" },
+        { imagen: "/images/levantada-pie.jpg", titulo: "Levantada del pie" },
+        { imagen: "/images/arrastrada-ala.jpg", titulo: "La arrastrada del ala" },
+        { imagen: "/images/secreto.jpg", titulo: "El secreto" },
+        { imagen: "/images/salida-final.jpg", titulo: "Salida final" }
+    ];
+
+    let indice = 0;
+
+    sliderDots.innerHTML = "";
+
+    figuras.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.classList.add("slider-dot");
+
+        if (i === 0) {
+            dot.classList.add("active");
+        }
+
+        sliderDots.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".slider-dot");
+
+    function actualizarSlider(nuevoIndice) {
+        sliderImage.classList.add("fade-out");
+
+        setTimeout(() => {
+            indice = nuevoIndice;
+
+            sliderImage.src = figuras[indice].imagen;
+            sliderTitle.textContent = figuras[indice].titulo;
+
+            dots.forEach(dot => dot.classList.remove("active"));
+            dots[indice].classList.add("active");
+
+            sliderImage.classList.remove("fade-out");
+        }, 450);
+    }
+
+    setInterval(() => {
+        const siguiente = (indice + 1) % figuras.length;
+        actualizarSlider(siguiente);
+    }, 3000);
 }
