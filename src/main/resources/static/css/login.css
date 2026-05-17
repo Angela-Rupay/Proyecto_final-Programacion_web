@@ -25,14 +25,9 @@ body{
 
 .login-page{
     min-height:100vh;
-    background:
-            linear-gradient(
-                    rgba(8,47,58,.72),
-                    rgba(8,47,58,.78)
-            ),
-            url("static/images/login-bg.jpg");
     background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
     position:relative;
     display:flex;
     justify-content:center;
@@ -170,6 +165,10 @@ body{
     background-color:rgba(56,176,0,.15);
     border:1px solid rgba(56,176,0,.5);
     color:#d8ffd0;
+}
+
+#mensaje.warning{
+    color:#fff7b2;
 }
 
 /* BUTTON */
