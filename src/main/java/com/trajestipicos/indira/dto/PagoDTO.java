@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PagoDTO {
 
-    private String documento;
+    private Long documento;
     private String titular;
     private String numeroTarjeta;
     private String fechaVencimiento;

@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface CarritoItemRepository extends JpaRepository<CarritoItem, Long> {
 
-    List<CarritoItem> findByUsuario_Documento(String documento);
+    List<CarritoItem> findByUsuario_Documento(Long documento);
 
     Optional<CarritoItem> findByUsuario_DocumentoAndVestido_IdVestido(
-            String documento,
+            Long documento,
             Long idVestido
     );
 
     boolean existsByUsuario_DocumentoAndVestido_IdVestido(
-            String documento,
+            Long documento,
             Long idVestido
     );
 }

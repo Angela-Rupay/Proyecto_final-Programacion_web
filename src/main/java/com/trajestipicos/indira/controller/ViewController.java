@@ -71,4 +71,9 @@ public class ViewController {
         return "ver-productos";
     }
 
+    @GetMapping("/oauth-success")
+    public String oauthSuccess() {
+        return "oauth-success";
+    }
+
 }

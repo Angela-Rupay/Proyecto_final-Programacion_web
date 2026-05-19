@@ -12,7 +12,7 @@ public class VentaResponseDTO {
 
     private Long idVenta;
 
-    private String documentoCliente;
+    private Long documentoCliente;
     private String nombreCliente;
 
     private LocalDateTime fechaCompra;

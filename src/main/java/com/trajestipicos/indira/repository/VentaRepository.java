@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface VentaRepository extends JpaRepository<Venta, Long> {
 
-    List<Venta> findByUsuario_Documento(String documento);
+    List<Venta> findByUsuario_Documento(Long documento);
 }

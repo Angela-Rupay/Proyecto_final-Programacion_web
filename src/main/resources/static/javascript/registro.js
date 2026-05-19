@@ -121,7 +121,7 @@ registroForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     ocultarMensaje();
     const datos = {
-        documento: documentoInput.value.trim(),
+        documento: Number(documentoInput.value.trim()),
         nombre: nombreInput.value.trim(),
         apellido: apellidoInput.value.trim(),
         correo: correoInput.value.trim(),

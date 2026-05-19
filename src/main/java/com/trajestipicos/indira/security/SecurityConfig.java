@@ -13,9 +13,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final OAuth2SuccessHandler oauth2SuccessHandler;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            OAuth2SuccessHandler oauth2SuccessHandler
+    ) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.oauth2SuccessHandler = oauth2SuccessHandler;
     }
 
     @Bean
@@ -23,8 +28,13 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
 
+                /*
+                 * IMPORTANTE:
+                 * JWT puede trabajar sin sesión, pero OAuth2 con Google necesita una sesión temporal
+                 * para guardar el estado entre la salida hacia Google y el regreso al backend.
+                 */
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
 
                 .authorizeHttpRequests(auth -> auth
@@ -44,7 +54,14 @@ public class SecurityConfig {
                                 "/historial",
                                 "/pago",
                                 "/sin-permisos",
-                                "/error"
+                                "/error",
+
+                                // Esta vista la usaremos luego para completar documento y teléfono
+                                "/completar-perfil",
+
+                                // OAuth Google
+                                "/oauth2/**",
+                                "/login/oauth2/**"
                         ).permitAll()
 
                         // ARCHIVOS ESTÁTICOS
@@ -97,6 +114,16 @@ public class SecurityConfig {
                         ).hasAnyRole("ADMIN", "CLIENTE")
 
                         .anyRequest().authenticated()
+                )
+
+                /*
+                 * OAuth2 con Google.
+                 * Por ahora, solo redirigimos al catálogo cuando Google responda bien.
+                 * Más adelante cambiaremos esto por un SuccessHandler personalizado
+                 * para decidir si va a catálogo o a completar-perfil.
+                 */
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(oauth2SuccessHandler)
                 )
 
                 .addFilterBefore(

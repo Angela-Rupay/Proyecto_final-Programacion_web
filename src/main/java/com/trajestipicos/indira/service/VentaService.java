@@ -34,7 +34,7 @@ public class VentaService {
         this.vestidoRepository = vestidoRepository;
     }
 
-    public ApiResponse realizarCompra(String documento) {
+    public ApiResponse realizarCompra(Long documento) {
 
         Usuario usuario = usuarioRepository.findById(documento)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -87,7 +87,7 @@ public class VentaService {
         return new ApiResponse(true, "Compra realizada correctamente");
     }
 
-    public List<VentaResponseDTO> historialCliente(String documento) {
+    public List<VentaResponseDTO> historialCliente(Long documento) {
 
         return ventaRepository.findByUsuario_Documento(documento)
                 .stream()

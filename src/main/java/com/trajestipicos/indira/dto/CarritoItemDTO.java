@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CarritoItemDTO {
 
-    private String documento;
+    private Long documento;
     private Long idVestido;
 
     private Long idCarritoItem;

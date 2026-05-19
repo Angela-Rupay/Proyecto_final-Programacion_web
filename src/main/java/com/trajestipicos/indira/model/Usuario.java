@@ -11,8 +11,16 @@ import lombok.*;
 @AllArgsConstructor
 public class Usuario {
 
+    public Long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Long documento) {
+        this.documento = documento;
+    }
+
     @Id
-    private String documento;
+    private Long documento;
 
     @Column(nullable = false)
     private String nombre;
@@ -25,7 +33,7 @@ public class Usuario {
 
     private String telefono;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
     @Column(nullable = false)
@@ -35,4 +43,10 @@ public class Usuario {
     @JoinColumn(name = "id_rol", nullable = false)
     @ToString.Exclude
     private Rol rol;
+
+    @Column(nullable = false)
+    private String provider; // LOCAL o GOOGLE
+
+    @Column(unique = true)
+    private String googleId;
 }

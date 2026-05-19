@@ -10,7 +10,7 @@ public class LoginResponseDTO {
     private boolean success;
     private String message;
 
-    private String documento;
+    private Long documento;
     private String nombre;
     private String apellido;
     private String correo;

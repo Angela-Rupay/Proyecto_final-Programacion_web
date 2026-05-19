@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class RegistroDTO {
 
-    private String documento;
+    private Long documento;
     private String nombre;
     private String apellido;
     private String correo;

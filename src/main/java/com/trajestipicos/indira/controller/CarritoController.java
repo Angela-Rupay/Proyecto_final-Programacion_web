@@ -36,7 +36,7 @@ public class CarritoController {
 
     @Operation(summary = "Consultar carrito de un usuario")
     @GetMapping("/{documento}")
-    public List<CarritoItemDTO> obtenerCarrito(@PathVariable String documento) {
+    public List<CarritoItemDTO> obtenerCarrito(@PathVariable Long documento) {
         return carritoItemRepository.findByUsuario_Documento(documento)
                 .stream()
                 .map(item -> new CarritoItemDTO(

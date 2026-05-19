@@ -23,14 +23,14 @@ public class VentaController {
 
     @Operation(summary = "Realizar compra desde el carrito")
     @PostMapping("/comprar/{documento}")
-    public ApiResponse realizarCompra(@PathVariable String documento) {
+    public ApiResponse realizarCompra(@PathVariable Long documento) {
         return ventaService.realizarCompra(documento);
     }
 
     @Operation(summary = "Consultar historial de compras de un cliente")
     @GetMapping("/cliente/{documento}")
     public List<VentaResponseDTO> historialCliente(
-            @PathVariable String documento
+            @PathVariable Long documento
     ) {
         return ventaService.historialCliente(documento);
     }

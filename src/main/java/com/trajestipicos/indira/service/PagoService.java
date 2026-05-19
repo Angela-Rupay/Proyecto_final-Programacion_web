@@ -15,7 +15,7 @@ public class PagoService {
 
     public ApiResponse procesarPago(PagoDTO dto) {
 
-        if (dto.getDocumento() == null || dto.getDocumento().isBlank()) {
+        if (dto.getDocumento() == null) {
             return new ApiResponse(false, "No se encontró el usuario");
         }
 
