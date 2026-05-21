@@ -8,11 +8,26 @@
 
 <script>
     const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
 
-    if (token) {
-        localStorage.setItem("token", token);
-        window.location.href = "/catalogo";
+    const usuario = {
+        success: params.get("success") === "true",
+        message: params.get("message") || "Login exitoso",
+        documento: Number(params.get("documento")),
+        nombre: params.get("nombre"),
+        apellido: params.get("apellido"),
+        correo: params.get("correo"),
+        rol: params.get("rol"),
+        token: params.get("token")
+    };
+
+    if (usuario.success && usuario.token && usuario.correo && usuario.rol) {
+        localStorage.setItem("usuario", JSON.stringify(usuario));
+
+        if (usuario.rol === "ADMIN") {
+            window.location.href = "/admin";
+        } else {
+            window.location.href = "/catalogo";
+        }
     } else {
         window.location.href = "/login";
     }

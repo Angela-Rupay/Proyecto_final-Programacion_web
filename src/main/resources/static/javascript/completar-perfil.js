@@ -94,13 +94,7 @@ completarPerfilForm.addEventListener("submit", async (e) => {
         const data = await response.json();
 
         if (data.success) {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("documento", data.documento);
-            localStorage.setItem("nombre", data.nombre);
-            localStorage.setItem("apellido", data.apellido);
-            localStorage.setItem("correo", data.correo);
-            localStorage.setItem("rol", data.rol);
-
+            localStorage.setItem("usuario", JSON.stringify(data));
             modalOverlay.classList.add("active");
 
             setTimeout(() => {

@@ -59,7 +59,17 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
             String token = jwtService.generarToken(usuario);
 
-            response.sendRedirect("/oauth-success?token=" + encode(token));
+            String redirectUrl = "/oauth-success"
+                    + "?success=true"
+                    + "&message=" + encode("Login exitoso")
+                    + "&documento=" + usuario.getDocumento()
+                    + "&nombre=" + encode(usuario.getNombre())
+                    + "&apellido=" + encode(usuario.getApellido())
+                    + "&correo=" + encode(usuario.getCorreo())
+                    + "&rol=" + encode(usuario.getRol().getTipoRol())
+                    + "&token=" + encode(token);
+
+            response.sendRedirect(redirectUrl);
             return;
         }
 
