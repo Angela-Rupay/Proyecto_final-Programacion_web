@@ -76,4 +76,8 @@ public class ViewController {
         return "oauth-success";
     }
 
+    @GetMapping("/completar-perfil")
+    public String completarPerfil() {
+        return "completar-perfil";
+    }
 }

@@ -473,3 +473,37 @@ body{
         flex-direction:column;
     }
 }
+
+#completarPerfilForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.google-summary {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
+    border-left: 4px solid var(--color-dorado);
+    border-radius: 18px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.4rem;
+    color: white;
+    box-shadow: var(--sombra-suave);
+}
+
+.google-summary p {
+    margin: .4rem 0;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.google-summary i {
+    color: var(--color-dorado);
+}
+
+.google-summary strong {
+    color: var(--color-dorado);
+}

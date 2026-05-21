@@ -1,9 +1,6 @@
 package com.trajestipicos.indira.controller;
 
-import com.trajestipicos.indira.dto.ApiResponse;
-import com.trajestipicos.indira.dto.LoginDTO;
-import com.trajestipicos.indira.dto.LoginResponseDTO;
-import com.trajestipicos.indira.dto.RegistroDTO;
+import com.trajestipicos.indira.dto.*;
 import com.trajestipicos.indira.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,5 +33,11 @@ public class AuthController {
     @PostMapping("/registro-admin")
     public ApiResponse registrarAdmin(@RequestBody RegistroDTO dto) {
         return usuarioService.registrarAdmin(dto);
+    }
+
+    @Operation(summary = "Completar perfil de usuario autenticado con Google")
+    @PostMapping("/google/completar-perfil")
+    public LoginResponseDTO completarPerfilGoogle(@RequestBody CompletarPerfilGoogleDTO dto) {
+        return usuarioService.completarPerfilGoogle(dto);
     }
 }

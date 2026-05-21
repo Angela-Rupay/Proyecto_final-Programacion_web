@@ -30,7 +30,8 @@ public class Usuario {
 
     @Column(nullable = false, unique = true)
     private String correo;
-
+    
+    @Column(nullable = false, unique = true)
     private String telefono;
 
     @Column(nullable = true)

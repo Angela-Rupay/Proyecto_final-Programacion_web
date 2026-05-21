@@ -1,9 +1,5 @@
 package com.trajestipicos.indira.service;
 
-import com.trajestipicos.indira.dto.ApiResponse;
-import com.trajestipicos.indira.dto.LoginDTO;
-import com.trajestipicos.indira.dto.LoginResponseDTO;
-import com.trajestipicos.indira.dto.RegistroDTO;
 import com.trajestipicos.indira.model.Rol;
 import com.trajestipicos.indira.model.Usuario;
 import com.trajestipicos.indira.repository.RolRepository;
@@ -11,6 +7,7 @@ import com.trajestipicos.indira.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.trajestipicos.indira.security.JwtService;
+import com.trajestipicos.indira.dto.*;
 
 @Service
 public class UsuarioService {
@@ -52,8 +49,9 @@ public class UsuarioService {
         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         usuario.setRol(rolCliente);
-
         usuario.setActivo(true);
+        usuario.setProvider("LOCAL");
+        usuario.setGoogleId(null);
 
         usuarioRepository.save(usuario);
 
@@ -121,11 +119,127 @@ public class UsuarioService {
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
+
         usuario.setRol(rolAdmin);
         usuario.setActivo(true);
+        usuario.setProvider("LOCAL");
+        usuario.setGoogleId(null);
+
+        usuarioRepository.save(usuario);
 
         usuarioRepository.save(usuario);
 
         return new ApiResponse(true, "Administrador registrado correctamente");
+    }
+
+    public LoginResponseDTO completarPerfilGoogle(CompletarPerfilGoogleDTO dto) {
+
+        if (dto.getDocumento() == null) {
+            return new LoginResponseDTO(
+                    false,
+                    "El documento es obligatorio",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+
+        if (dto.getTelefono() == null || dto.getTelefono().isBlank()) {
+            return new LoginResponseDTO(
+                    false,
+                    "El teléfono es obligatorio",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+
+        if (dto.getEmail() == null || dto.getEmail().isBlank()) {
+            return new LoginResponseDTO(
+                    false,
+                    "El correo de Google es obligatorio",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+
+        if (dto.getGoogleId() == null || dto.getGoogleId().isBlank()) {
+            return new LoginResponseDTO(
+                    false,
+                    "El identificador de Google es obligatorio",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+
+        if (usuarioRepository.existsByDocumento(dto.getDocumento())) {
+            return new LoginResponseDTO(
+                    false,
+                    "Ya existe un usuario con ese documento",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+
+        if (usuarioRepository.existsByCorreo(dto.getEmail())) {
+            return new LoginResponseDTO(
+                    false,
+                    "Ya existe un usuario con ese correo",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+
+        Rol rolCliente = rolRepository.findByTipoRol("CLIENTE")
+                .orElseThrow(() -> new RuntimeException("Rol CLIENTE no encontrado"));
+
+        Usuario usuario = new Usuario();
+        usuario.setDocumento(dto.getDocumento());
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellido(dto.getApellido());
+        usuario.setCorreo(dto.getEmail());
+        usuario.setTelefono(dto.getTelefono());
+        usuario.setPassword(null);
+        usuario.setRol(rolCliente);
+        usuario.setActivo(true);
+        usuario.setProvider("GOOGLE");
+        usuario.setGoogleId(dto.getGoogleId());
+
+        usuarioRepository.save(usuario);
+
+        String token = jwtService.generarToken(usuario);
+
+        return new LoginResponseDTO(
+                true,
+                "Perfil completado correctamente",
+                usuario.getDocumento(),
+                usuario.getNombre(),
+                usuario.getApellido(),
+                usuario.getCorreo(),
+                usuario.getRol().getTipoRol(),
+                token
+        );
     }
 }
