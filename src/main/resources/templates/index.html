@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDIRA Trajes Típicos</title>
+    <title th:text="#{index.title}">INDIRA Trajes Típicos</title>
 
     <link rel="stylesheet" href="/css/index.css">
 
@@ -15,14 +15,23 @@
 
 <header class="main-header">
     <div class="brand-section">
-        <img src="/images/logo.png" alt="Logo Indira" class="logo-img">
-        <img src="/images/nombre.png" alt="Indira Trajes Típicos" class="name-img">
-        <img src="/images/slogan.png" alt="Vive la tradición con elegancia" class="slogan-img">
+        <img src="/images/logo.png"
+             th:alt="#{index.logo.alt}"
+             alt="Logo Indira"
+             class="logo-img">
+
+        <img src="/images/nombre.png"
+             th:alt="#{index.name.alt}"
+             alt="Indira Trajes Típicos"
+             class="name-img">
+
+        <img src="/images/slogan.png"
+             th:alt="#{index.slogan.alt}"
+             alt="Vive la tradición con elegancia"
+             class="slogan-img">
     </div>
 
-    <nav class="navbar">
-        <script src="/javascript/global.js" defer></script>
-    </nav>
+    <nav class="navbar"></nav>
 </header>
 
 <main>
@@ -30,6 +39,7 @@
     <section class="hero">
 
         <img src="/images/fondo.png"
+             th:alt="#{index.hero.image.alt}"
              alt="Fondo flores de sanjuanero"
              class="hero-bg">
 
@@ -37,25 +47,24 @@
 
         <div class="hero-content">
 
-        <span class="hero-tag">
-            Tradición • Elegancia • Cultura
-        </span>
+            <span class="hero-tag" th:text="#{index.hero.tag}">
+                Tradición • Elegancia • Cultura
+            </span>
 
-            <h1>
-                Vive la tradición
-                con elegancia
+            <h1 th:text="#{index.hero.title}">
+                Vive la tradición con elegancia
             </h1>
 
-            <p>
-                Descubre vestidos típicos exclusivos inspirados
-                en la belleza y el arte del sanjuanero huilense.
+            <p th:text="#{index.hero.description}">
+                Descubre vestidos típicos exclusivos inspirados en la belleza y el arte del sanjuanero huilense.
             </p>
 
-            <a href="/catalogo"
+            <a th:href="@{/catalogo(lang=${#locale.language})}"
+               href="/catalogo"
                class="hero-btn">
 
                 <i class="bi bi-bag-heart-fill"></i>
-                Explorar catálogo
+                <span th:text="#{index.hero.button}">Explorar catálogo</span>
 
             </a>
 
@@ -69,20 +78,17 @@
 
             <div class="about-text">
 
-            <span class="about-label">
-                Sobre nosotros
-            </span>
+                <span class="about-label" th:text="#{index.about.label}">
+                    Sobre nosotros
+                </span>
 
-                <h2>
+                <h2 th:text="#{index.about.title}">
                     INDIRA Trajes Típicos
                 </h2>
 
                 <div class="about-card">
-                    <p>
-                        Somos una microempresa ubicada en Neiva, dedicada a la confección
-                        y venta de trajes típicos de Sanjuanero. Cada vestido es una pieza
-                        única, pensada para resaltar la elegancia, el color y la tradición
-                        de nuestra cultura.
+                    <p th:text="#{index.about.description}">
+                        Somos una microempresa ubicada en Neiva, dedicada a la confección y venta de trajes típicos de Sanjuanero.
                     </p>
                 </div>
 
@@ -90,42 +96,52 @@
 
             <div class="about-image-card">
                 <img src="/images/microempresa.jpeg"
+                     th:alt="#{index.about.image.alt}"
                      alt="Fachada de INDIRA Trajes Típicos">
             </div>
 
         </div>
 
     </section>
+
     <section class="models-section">
         <div class="section-title">
-            <span>Modelos</span>
-            <h2>Encuentra el estilo ideal</h2>
+            <span th:text="#{index.models.label}">Modelos</span>
+            <h2 th:text="#{index.models.title}">Encuentra el estilo ideal</h2>
         </div>
 
         <div class="models-grid">
             <article class="model-card">
                 <i class="bi bi-flower1"></i>
-                <h3>Tradicional</h3>
-                <p>Diseños clásicos inspirados en la esencia del Sanjuanero.</p>
+                <h3 th:text="#{index.model.traditional.title}">Tradicional</h3>
+                <p th:text="#{index.model.traditional.description}">
+                    Diseños clásicos inspirados en la esencia del Sanjuanero.
+                </p>
             </article>
 
             <article class="model-card">
                 <i class="bi bi-flower1"></i>
                 <i class="bi bi-palette-fill"></i>
-                <h3>Pintado</h3>
-                <p>Vestidos con detalles artísticos llenos de color y expresión.</p>
+                <h3 th:text="#{index.model.painted.title}">Pintado</h3>
+                <p th:text="#{index.model.painted.description}">
+                    Vestidos con detalles artísticos llenos de color y expresión.
+                </p>
             </article>
 
             <article class="model-card">
                 <i class="bi bi-stars"></i>
-                <h3>Fantasía</h3>
-                <p>Diseños llamativos para destacar en cada presentación.</p>
+                <h3 th:text="#{index.model.fantasy.title}">Fantasía</h3>
+                <p th:text="#{index.model.fantasy.description}">
+                    Diseños llamativos para destacar en cada presentación.
+                </p>
             </article>
 
             <article class="model-card">
                 <i class="bi bi-gem"></i>
-                <h3>Profesional</h3>
-                <p>Trajes elaborados para presentaciones, concursos y eventos especiales.</p>
+                <h3 th:text="#{index.model.professional.title}">Profesional</h3>
+                <p th:text="#{index.model.professional.description}">
+                    Trajes elaborados para presentaciones, concursos y eventos especiales.
+                </p>
             </article>
         </div>
     </section>
@@ -133,29 +149,47 @@
     <section class="contact-section">
         <div class="contact-info">
             <div class="section-title left">
-                <span>Ubicación</span>
-                <h2>Visítanos en Neiva</h2>
+                <span th:text="#{index.location.label}">Ubicación</span>
+                <h2 th:text="#{index.location.title}">Visítanos en Neiva</h2>
             </div>
 
             <p>
-                <strong>Ubicación:</strong> Carrera 12 # 14-83, barrio Chapinero
-                Diagonal al colegio nacional Santa Librada.
+                <strong th:text="#{index.location.label}">Ubicación</strong>:
+                <span th:text="#{index.location.text}">
+                    Carrera 12 # 14-83, barrio Chapinero. Diagonal al colegio nacional Santa Librada.
+                </span>
             </p>
 
             <div class="social-links">
-                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                <a href="#"
+                   th:aria-label="#{index.social.facebook}"
+                   aria-label="Facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+
+                <a href="#"
+                   th:aria-label="#{index.social.instagram}"
+                   aria-label="Instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+
+                <a href="#"
+                   th:aria-label="#{index.social.tiktok}"
+                   aria-label="TikTok">
+                    <i class="bi bi-tiktok"></i>
+                </a>
             </div>
 
             <a href="https://wa.me/573163535754" target="_blank" class="whatsapp-btn">
                 <i class="bi bi-whatsapp"></i>
-                Contáctanos por WhatsApp
+                <span th:text="#{index.whatsapp}">Contáctanos por WhatsApp</span>
             </a>
         </div>
 
         <div class="map-container">
             <iframe
+                    th:title="#{index.map.title}"
+                    title="Mapa de ubicación de INDIRA Trajes Típicos"
                     src="https://www.google.com/maps?q=Carrera%2012%20%2314-83%20Neiva%20Huila&output=embed"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
@@ -166,7 +200,7 @@
 </main>
 
 <footer class="footer">
-    <p>© 2026 Indira trajes típicos</p>
+    <p th:text="#{index.footer}">© 2026 Indira trajes típicos</p>
 </footer>
 
 </body>
