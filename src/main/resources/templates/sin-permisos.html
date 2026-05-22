@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sin permisos | INDIRA</title>
+    <title th:text="#{permissions.page.title}">Sin permisos | INDIRA</title>
 
     <link rel="stylesheet" href="/css/sin-permisos.css">
 
@@ -15,9 +15,20 @@
 
 <header class="main-header">
     <div class="brand-section">
-        <img src="/images/logo.png" alt="Logo Indira" class="logo-img">
-        <img src="/images/nombre.png" alt="Indira Trajes Típicos" class="name-img">
-        <img src="/images/slogan.png" alt="Vive la tradición con elegancia" class="slogan-img">
+        <img src="/images/logo.png"
+             th:alt="#{permissions.logo.alt}"
+             alt="Logo Indira"
+             class="logo-img">
+
+        <img src="/images/nombre.png"
+             th:alt="#{permissions.name.alt}"
+             alt="Indira Trajes Típicos"
+             class="name-img">
+
+        <img src="/images/slogan.png"
+             th:alt="#{permissions.slogan.alt}"
+             alt="Vive la tradición con elegancia"
+             class="slogan-img">
     </div>
 
     <nav class="navbar"></nav>
@@ -27,22 +38,25 @@
     <section class="permission-card">
         <i class="bi bi-shield-lock-fill"></i>
 
-        <h1>No tienes permisos</h1>
+        <h1 th:text="#{permissions.title}">No tienes permisos</h1>
 
-        <p>
+        <p th:text="#{permissions.description}">
             Esta sección está reservada para otro tipo de usuario.
             Verifica que hayas iniciado sesión con la cuenta correcta.
         </p>
 
-        <a href="/" class="home-btn">
+        <a th:href="@{/(lang=${#locale.language})}"
+           href="/"
+           class="home-btn">
+
             <i class="bi bi-house-heart-fill"></i>
-            Volver al inicio
+            <span th:text="#{permissions.back.home}">Volver al inicio</span>
         </a>
     </section>
 </main>
 
 <footer class="footer">
-    <p>© 2026 Indira trajes típicos</p>
+    <p th:text="#{permissions.footer}">© 2026 Indira trajes típicos</p>
 </footer>
 
 </body>

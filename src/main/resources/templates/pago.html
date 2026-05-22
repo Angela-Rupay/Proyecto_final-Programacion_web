@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago | INDIRA</title>
+    <title th:text="#{payment.page.title}">Pago | INDIRA</title>
 
     <link rel="stylesheet" href="/css/pago.css">
 
@@ -17,9 +17,20 @@
 
 <header class="main-header">
     <div class="brand-section">
-        <img src="/images/logo.png" alt="Logo" class="logo-img">
-        <img src="/images/nombre.png" alt="Nombre" class="name-img">
-        <img src="/images/slogan.png" alt="Slogan" class="slogan-img">
+        <img src="/images/logo.png"
+             th:alt="#{payment.logo.alt}"
+             alt="Logo"
+             class="logo-img">
+
+        <img src="/images/nombre.png"
+             th:alt="#{payment.name.alt}"
+             alt="Nombre"
+             class="name-img">
+
+        <img src="/images/slogan.png"
+             th:alt="#{payment.slogan.alt}"
+             alt="Slogan"
+             class="slogan-img">
     </div>
 
     <nav class="navbar"></nav>
@@ -28,9 +39,11 @@
 <main class="payment-page">
 
     <section class="payment-header">
-        <span>Finalizar compra</span>
-        <h1>Pago seguro</h1>
-        <p>Ingresa los datos de la tarjeta para completar la transacción simulada.</p>
+        <span th:text="#{payment.header.label}">Finalizar compra</span>
+        <h1 th:text="#{payment.header.title}">Pago seguro</h1>
+        <p th:text="#{payment.header.description}">
+            Ingresa los datos de la tarjeta para completar la transacción simulada.
+        </p>
     </section>
 
     <section class="payment-layout">
@@ -40,56 +53,87 @@
             <div class="input-group">
                 <label for="titular">
                     <i class="bi bi-person-fill"></i>
-                    Nombre del titular
+                    <span th:text="#{payment.cardholder.label}">Nombre del titular</span>
                 </label>
-                <input type="text" id="titular" placeholder="Nombre completo" required>
+
+                <input type="text"
+                       id="titular"
+                       th:placeholder="#{payment.cardholder.placeholder}"
+                       placeholder="Nombre completo"
+                       required>
             </div>
 
             <div class="input-group">
                 <label for="tarjeta">
                     <i class="bi bi-credit-card-fill"></i>
-                    Número de tarjeta
+                    <span th:text="#{payment.card.number.label}">Número de tarjeta</span>
                 </label>
-                <input type="text" id="tarjeta" maxlength="19" placeholder="0000 0000 0000 0000" required>
+
+                <input type="text"
+                       id="tarjeta"
+                       maxlength="19"
+                       th:placeholder="#{payment.card.number.placeholder}"
+                       placeholder="0000 0000 0000 0000"
+                       required>
             </div>
 
             <div class="input-grid">
                 <div class="input-group">
                     <label for="fecha">
                         <i class="bi bi-calendar2-week-fill"></i>
-                        Vencimiento
+                        <span th:text="#{payment.expiration.label}">Vencimiento</span>
                     </label>
-                    <input type="text" id="fecha" maxlength="5" placeholder="MM/AA" required>
+
+                    <input type="text"
+                           id="fecha"
+                           maxlength="5"
+                           th:placeholder="#{payment.expiration.placeholder}"
+                           placeholder="MM/AA"
+                           required>
                 </div>
 
                 <div class="input-group">
                     <label for="cvv">
                         <i class="bi bi-shield-lock-fill"></i>
-                        CVV
+                        <span th:text="#{payment.cvv.label}">CVV</span>
                     </label>
-                    <input type="password" id="cvv" maxlength="3" placeholder="123" required>
+
+                    <input type="password"
+                           id="cvv"
+                           maxlength="3"
+                           th:placeholder="#{payment.cvv.placeholder}"
+                           placeholder="123"
+                           required>
                 </div>
             </div>
 
             <div class="input-group">
                 <label for="direccion">
                     <i class="bi bi-geo-alt-fill"></i>
-                    Dirección de entrega
+                    <span th:text="#{payment.address.label}">Dirección de entrega</span>
                 </label>
-                <input type="text" id="direccion" placeholder="Dirección de entrega" required>
+
+                <input type="text"
+                       id="direccion"
+                       th:placeholder="#{payment.address.placeholder}"
+                       placeholder="Dirección de entrega"
+                       required>
             </div>
 
             <div class="message-box" id="messageBox"></div>
 
             <div class="buttons">
-                <a href="/carrito" class="back-btn">
+                <a th:href="@{/carrito(lang=${#locale.language})}"
+                   href="/carrito"
+                   class="back-btn">
+
                     <i class="bi bi-arrow-left"></i>
-                    Volver al carrito
+                    <span th:text="#{payment.back.cart}">Volver al carrito</span>
                 </a>
 
                 <button type="submit" class="pay-btn" id="payBtn">
                     <i class="bi bi-check-circle-fill"></i>
-                    Completar transacción
+                    <span th:text="#{payment.complete.transaction}">Completar transacción</span>
                 </button>
             </div>
 
@@ -97,8 +141,10 @@
 
         <aside class="summary-card">
             <i class="bi bi-bag-check-fill"></i>
-            <h2>Resumen</h2>
-            <p>La compra se registrará en tu historial y en el historial de ventas del administrador.</p>
+            <h2 th:text="#{payment.summary.title}">Resumen</h2>
+            <p th:text="#{payment.summary.description}">
+                La compra se registrará en tu historial y en el historial de ventas del administrador.
+            </p>
             <h3 id="summaryTotal">$0</h3>
         </aside>
 
@@ -109,17 +155,20 @@
 <div class="modal-overlay" id="successModal">
     <div class="success-modal">
         <i class="bi bi-check-circle-fill"></i>
-        <h2>Compra exitosa</h2>
-        <p>Tu compra fue registrada correctamente.</p>
+        <h2 th:text="#{payment.modal.title}">Compra exitosa</h2>
+        <p th:text="#{payment.modal.description}">Tu compra fue registrada correctamente.</p>
 
-        <a href="/historial" class="modal-btn">
+        <a th:href="@{/historial(lang=${#locale.language})}"
+           href="/historial"
+           class="modal-btn"
+           th:text="#{payment.modal.history}">
             Ver historial
         </a>
     </div>
 </div>
 
 <footer class="footer">
-    <p>© 2026 Indira trajes típicos</p>
+    <p th:text="#{payment.footer}">© 2026 Indira trajes típicos</p>
 </footer>
 
 </body>

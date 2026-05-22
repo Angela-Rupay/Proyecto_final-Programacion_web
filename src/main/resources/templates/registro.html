@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro | INDIRA</title>
+    <title th:text="#{register.page.title}">Registro | INDIRA</title>
 
     <link rel="stylesheet" href="/css/registro.css">
 
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <script src="/javascript/global.js" defer></script>
     <script src="/javascript/registro.js" defer></script>
 </head>
 <body>
@@ -25,15 +26,16 @@
             <div class="slider-image-wrapper">
                 <img id="sliderImage"
                      src="/images/sanjuanero/invitacion.jpg"
+                     th:alt="#{register.slider.image.alt}"
                      alt="Figura del Sanjuanero">
             </div>
 
             <div class="slider-info">
-                <span>FIGURA DEL SANJUANERO</span>
+                <span th:text="#{register.slider.label}">FIGURA DEL SANJUANERO</span>
 
                 <div class="slider-line"></div>
 
-                <h1 id="sliderTitle">
+                <h1 id="sliderTitle" >
                     Invitación
                 </h1>
 
@@ -51,11 +53,11 @@
 
         <div class="form-container">
 
-            <span class="form-label">
+            <span class="form-label" th:text="#{register.form.label}">
                 Únete a INDIRA
             </span>
 
-            <h2>Crear cuenta</h2>
+            <h2 th:text="#{register.form.title}">Crear cuenta</h2>
 
             <form id="registroForm">
 
@@ -64,11 +66,12 @@
                     <div class="input-group">
                         <label>
                             <i class="bi bi-person-fill"></i>
-                            Nombre
+                            <span th:text="#{register.name.label}">Nombre</span>
                         </label>
 
                         <input type="text"
                                id="nombre"
+                               th:placeholder="#{register.name.placeholder}"
                                placeholder="Angela"
                                required>
                     </div>
@@ -76,11 +79,12 @@
                     <div class="input-group">
                         <label>
                             <i class="bi bi-person-fill"></i>
-                            Apellido
+                            <span th:text="#{register.lastname.label}">Apellido</span>
                         </label>
 
                         <input type="text"
                                id="apellido"
+                               th:placeholder="#{register.lastname.placeholder}"
                                placeholder="Rojas"
                                required>
                     </div>
@@ -90,11 +94,12 @@
                 <div class="input-group">
                     <label>
                         <i class="bi bi-credit-card-2-front-fill"></i>
-                        Número de cédula
+                        <span th:text="#{register.document.label}">Número de cédula</span>
                     </label>
 
                     <input type="text"
                            id="documento"
+                           th:placeholder="#{register.document.placeholder}"
                            placeholder="1234567890"
                            required>
                 </div>
@@ -102,11 +107,12 @@
                 <div class="input-group">
                     <label>
                         <i class="bi bi-envelope-fill"></i>
-                        Correo electrónico
+                        <span th:text="#{register.email.label}">Correo electrónico</span>
                     </label>
 
                     <input type="email"
                            id="correo"
+                           th:placeholder="#{register.email.placeholder}"
                            placeholder="correo@ejemplo.com"
                            required>
                 </div>
@@ -114,11 +120,12 @@
                 <div class="input-group">
                     <label>
                         <i class="bi bi-telephone-fill"></i>
-                        Teléfono
+                        <span th:text="#{register.phone.label}">Teléfono</span>
                     </label>
 
                     <input type="text"
                            id="telefono"
+                           th:placeholder="#{register.phone.placeholder}"
                            placeholder="3XXXXXXXXX"
                            required>
                 </div>
@@ -126,19 +133,24 @@
                 <div class="input-group">
                     <label>
                         <i class="bi bi-lock-fill"></i>
-                        Contraseña
+                        <span th:text="#{register.password.label}">Contraseña</span>
                     </label>
 
                     <div class="password-container">
 
                         <input type="password"
                                id="password"
+                               th:placeholder="#{register.password.placeholder}"
                                placeholder="Crea una contraseña segura"
                                required>
 
                         <button type="button"
                                 class="toggle-password"
-                                id="togglePassword">
+                                id="togglePassword"
+                                th:title="#{register.password.toggle}"
+                                th:aria-label="#{register.password.toggle}"
+                                title="Mostrar u ocultar contraseña"
+                                aria-label="Mostrar u ocultar contraseña">
 
                             <i class="bi bi-eye-fill"></i>
 
@@ -154,17 +166,17 @@
 
                     <div class="rule" id="ruleLength">
                         <i class="bi bi-circle"></i>
-                        Mínimo 8 caracteres
+                        <span th:text="#{register.password.rule.length}">Mínimo 8 caracteres</span>
                     </div>
 
                     <div class="rule" id="ruleUppercase">
                         <i class="bi bi-circle"></i>
-                        Al menos una mayúscula
+                        <span th:text="#{register.password.rule.uppercase}">Al menos una mayúscula</span>
                     </div>
 
                     <div class="rule" id="ruleNumber">
                         <i class="bi bi-circle"></i>
-                        Al menos un número
+                        <span th:text="#{register.password.rule.number}">Al menos un número</span>
                     </div>
 
                 </div>
@@ -178,29 +190,35 @@
                         disabled>
 
                     <i class="bi bi-person-plus-fill"></i>
-                    Registrarme
+                    <span th:text="#{register.button.submit}">Registrarme</span>
 
                 </button>
 
             </form>
 
             <p class="login-link">
-                ¿Ya tienes una cuenta?
+                <span th:text="#{register.already.account}">¿Ya tienes una cuenta?</span>
 
-                <a href="/login">
+                <a th:href="@{/login(lang=${#locale.language})}"
+                   href="/login"
+                   th:text="#{register.login.link}">
                     Inicia sesión
                 </a>
             </p>
+
             <br>
+
             <a href="/oauth2/authorization/google" class="btn-google">
                 <i class="bi bi-google"></i>
-                Registrarme con Google
+                <span th:text="#{register.google.button}">Registrarme con Google</span>
             </a>
-            <a href="/"
+
+            <a th:href="@{/(lang=${#locale.language})}"
+               href="/"
                class="back-home">
 
                 <i class="bi bi-arrow-left"></i>
-                Volver al inicio
+                <span th:text="#{register.back.home}">Volver al inicio</span>
 
             </a>
         </div>
@@ -218,26 +236,26 @@
 
         <i class="bi bi-check-circle-fill"></i>
 
-        <h2>Registro exitoso</h2>
+        <h2 th:text="#{register.modal.title}">Registro exitoso</h2>
 
-        <p>
+        <p th:text="#{register.modal.description}">
             Tu cuenta fue creada correctamente.
         </p>
 
         <div class="modal-buttons">
 
-            <a href="/catalogo"
-               class="modal-btn primary">
-
+            <a th:href="@{/catalogo(lang=${#locale.language})}"
+               href="/catalogo"
+               class="modal-btn primary"
+               th:text="#{register.modal.catalog}">
                 Ver catálogo
-
             </a>
 
-            <a href="/"
-               class="modal-btn secondary">
-
+            <a th:href="@{/(lang=${#locale.language})}"
+               href="/"
+               class="modal-btn secondary"
+               th:text="#{register.modal.home}">
                 Ir al inicio
-
             </a>
 
         </div>

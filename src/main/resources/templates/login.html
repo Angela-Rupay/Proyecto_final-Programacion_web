@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | INDIRA</title>
+    <title th:text="#{login.page.title}">Login | INDIRA</title>
 
     <link rel="stylesheet" href="/css/login.css">
 
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <script src="/javascript/global.js" defer></script>
     <script src="/javascript/login.js" defer></script>
 </head>
 <body>
@@ -26,26 +27,32 @@
         <div class="login-card">
 
             <div class="logo-section">
-                <img src="/images/logo.png" alt="Logo Indira">
-                <img src="/images/nombre.png" alt="Indira">
+                <img src="/images/logo.png"
+                     th:alt="#{login.logo.alt}"
+                     alt="Logo Indira">
+
+                <img src="/images/nombre.png"
+                     th:alt="#{login.name.alt}"
+                     alt="Indira">
             </div>
 
-            <span class="login-label">
+            <span class="login-label" th:text="#{login.welcome}">
                 Bienvenido nuevamente
             </span>
 
-            <h1>Iniciar sesión</h1>
+            <h1 th:text="#{login.title}">Iniciar sesión</h1>
 
             <form id="loginForm">
 
                 <div class="input-group">
                     <label for="correo">
                         <i class="bi bi-envelope-fill"></i>
-                        Correo electrónico
+                        <span th:text="#{login.email.label}">Correo electrónico</span>
                     </label>
 
                     <input type="email"
                            id="correo"
+                           th:placeholder="#{login.email.placeholder}"
                            placeholder="correo@ejemplo.com"
                            required>
                 </div>
@@ -53,19 +60,24 @@
                 <div class="input-group">
                     <label for="password">
                         <i class="bi bi-lock-fill"></i>
-                        Contraseña
+                        <span th:text="#{login.password.label}">Contraseña</span>
                     </label>
 
                     <div class="password-container">
 
                         <input type="password"
                                id="password"
+                               th:placeholder="#{login.password.placeholder}"
                                placeholder="Ingresa tu contraseña"
                                required>
 
                         <button type="button"
                                 class="toggle-password"
-                                id="togglePassword">
+                                id="togglePassword"
+                                th:title="#{login.password.toggle}"
+                                th:aria-label="#{login.password.toggle}"
+                                title="Mostrar u ocultar contraseña"
+                                aria-label="Mostrar u ocultar contraseña">
 
                             <i class="bi bi-eye-fill"></i>
 
@@ -82,33 +94,43 @@
                         class="login-btn">
 
                     <i class="bi bi-box-arrow-in-right"></i>
-                    Iniciar sesión
+                    <span th:text="#{login.button}">Iniciar sesión</span>
 
                 </button>
+
                 <div class="oauth-divider">
-                    <span>o</span>
+                    <span th:text="#{login.divider}">o</span>
                 </div>
 
-                <a href="/oauth2/authorization/google" class="btn-google">
+                <a th:href="@{/oauth2/authorization/google}"
+                   href="/oauth2/authorization/google"
+                   class="btn-google">
+
                     <i class="bi bi-google"></i>
-                    Iniciar sesión con Google
+                    <span th:text="#{login.google.button}">
+                        Iniciar sesión con Google
+                    </span>
+
                 </a>
 
             </form>
 
             <p class="register-text">
-                ¿No tienes una cuenta?
+                <span th:text="#{login.no.account}">¿No tienes una cuenta?</span>
 
-                <a href="/registro">
+                <a th:href="@{/registro(lang=${#locale.language})}"
+                   href="/registro"
+                   th:text="#{login.register.link}">
                     Regístrate aquí
                 </a>
             </p>
 
-            <a href="/"
+            <a th:href="@{/(lang=${#locale.language})}"
+               href="/"
                class="back-home">
 
                 <i class="bi bi-arrow-left"></i>
-                Volver al inicio
+                <span th:text="#{login.back.home}">Volver al inicio</span>
 
             </a>
 

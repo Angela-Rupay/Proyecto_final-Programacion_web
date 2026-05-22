@@ -1,101 +1,133 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo | INDIRA</title>
+    <title th:text="#{catalog.page.title}">Catálogo | INDIRA</title>
 
     <link rel="stylesheet" href="/css/catalogo.css">
 
     <link rel="stylesheet"
-           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="/javascript/catalogo.js" defer></script>
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <script src="/javascript/global.js" defer></script>
+    <script src="/javascript/catalogo.js" defer></script>
 </head>
 <body>
 
 <header class="main-header">
     <div class="brand-section">
-        <img src="/images/logo.png" alt="Logo Indira" class="logo-img">
-        <img src="/images/nombre.png" alt="Indira Trajes Típicos" class="name-img">
-        <img src="/images/slogan.png" alt="Vive la tradición con elegancia" class="slogan-img">
+        <img src="/images/logo.png"
+             th:alt="#{catalog.logo.alt}"
+             alt="Logo Indira"
+             class="logo-img">
+
+        <img src="/images/nombre.png"
+             th:alt="#{catalog.name.alt}"
+             alt="Indira Trajes Típicos"
+             class="name-img">
+
+        <img src="/images/slogan.png"
+             th:alt="#{catalog.slogan.alt}"
+             alt="Vive la tradición con elegancia"
+             class="slogan-img">
     </div>
 
-    <nav class="navbar">
-    </nav>
+    <nav class="navbar"></nav>
 </header>
 
 <main>
 
     <section class="catalog-hero">
-        <h1>Catálogo de vestidos</h1>
-        <p>Explora piezas únicas inspiradas en la tradición del Sanjuanero Huilense.</p>
+        <h1 th:text="#{catalog.hero.title}">Catálogo de vestidos</h1>
+        <p th:text="#{catalog.hero.description}">
+            Explora piezas únicas inspiradas en la tradición del Sanjuanero Huilense.
+        </p>
     </section>
 
     <section class="catalog-layout">
 
         <aside class="filters-panel">
-            <h2>Filtrar por modelo</h2>
+            <h2 th:text="#{catalog.filter.model.title}">Filtrar por modelo</h2>
 
-            <button class="filter-btn active" data-modelo="todos">
+            <button class="filter-btn active" data-modelo="todos" th:text="#{catalog.filter.all}">
                 Todos
             </button>
 
-            <button class="filter-btn" data-modelo="TT">
+            <button class="filter-btn" data-modelo="TT" th:text="#{catalog.model.traditional}">
                 Tradicional
             </button>
 
-            <button class="filter-btn" data-modelo="TF">
+            <button class="filter-btn" data-modelo="TF" th:text="#{catalog.model.fantasy}">
                 Fantasía
             </button>
 
-            <button class="filter-btn" data-modelo="P">
+            <button class="filter-btn" data-modelo="P" th:text="#{catalog.model.painted}">
                 Pintado
             </button>
 
-            <button class="filter-btn" data-modelo="TPRO">
+            <button class="filter-btn" data-modelo="TPRO" th:text="#{catalog.model.professional}">
                 Profesional
             </button>
 
             <div class="size-filter">
-                <h2>Filtrar por talla</h2>
+                <h2 th:text="#{catalog.filter.size.title}">Filtrar por talla</h2>
 
-                <select id="tallaFilter">
-                    <option value="todos">Todas las tallas</option>
-                    <option value="0">Talla 0</option>
-                    <option value="2">Talla 2</option>
-                    <option value="4">Talla 4</option>
-                    <option value="6">Talla 6</option>
-                    <option value="8">Talla 8</option>
-                    <option value="10">Talla 10</option>
-                    <option value="12">Talla 12</option>
-                    <option value="14">Talla 14</option>
-                    <option value="16">Talla 16</option>
-                    <option value="S">Talla S</option>
-                    <option value="M">Talla M</option>
-                    <option value="L">Talla L</option>
-                    <option value="XL">Talla XL</option>
+                <select id="tallaFilter"
+                        th:title="#{catalog.filter.size.title}"
+                        title="Filtrar por talla">
+
+                    <option value="todos" th:text="#{catalog.size.all}">
+                        Todas las tallas
+                    </option>
+
+                    <option value="0" th:text="#{catalog.size.0}">Talla 0</option>
+                    <option value="2" th:text="#{catalog.size.2}">Talla 2</option>
+                    <option value="4" th:text="#{catalog.size.4}">Talla 4</option>
+                    <option value="6" th:text="#{catalog.size.6}">Talla 6</option>
+                    <option value="8" th:text="#{catalog.size.8}">Talla 8</option>
+                    <option value="10" th:text="#{catalog.size.10}">Talla 10</option>
+                    <option value="12" th:text="#{catalog.size.12}">Talla 12</option>
+                    <option value="14" th:text="#{catalog.size.14}">Talla 14</option>
+                    <option value="16" th:text="#{catalog.size.16}">Talla 16</option>
+                    <option value="S" th:text="#{catalog.size.s}">Talla S</option>
+                    <option value="M" th:text="#{catalog.size.m}">Talla M</option>
+                    <option value="L" th:text="#{catalog.size.l}">Talla L</option>
+                    <option value="XL" th:text="#{catalog.size.xl}">Talla XL</option>
                 </select>
             </div>
 
             <div class="model-info" id="modelInfo">
-                <h3>Todos los vestidos</h3>
-                <p>Visualiza todos los diseños disponibles actualmente.</p>
+                <h3 th:text="#{catalog.info.all.title}">Todos los vestidos</h3>
+                <p th:text="#{catalog.info.all.description}">
+                    Visualiza todos los diseños disponibles actualmente.
+                </p>
             </div>
         </aside>
 
         <section class="products-section">
             <div class="products-header">
-                <h2 id="catalogTitle">Vestidos disponibles</h2>
-                <span id="productCount">0 productos</span>
+                <h2 id="catalogTitle" th:text="#{catalog.products.title}">
+                    Vestidos disponibles
+                </h2>
+
+                <span id="productCount" th:text="#{catalog.products.count.initial}">
+                    0 productos
+                </span>
             </div>
 
             <div class="products-grid" id="productsGrid"></div>
 
             <div class="empty-message" id="emptyMessage">
                 <i class="bi bi-bag-heart"></i>
-                <h3>No hay vestidos disponibles</h3>
-                <p>Por ahora no existen productos para este modelo.</p>
+
+                <h3 th:text="#{catalog.empty.title}">
+                    No hay vestidos disponibles
+                </h3>
+
+                <p th:text="#{catalog.empty.description}">
+                    Por ahora no existen productos para este modelo.
+                </p>
             </div>
         </section>
 
@@ -104,7 +136,8 @@
 </main>
 
 <footer class="footer">
-    <p>© 2026 Indira trajes típicos</p>
+    <p th:text="#{catalog.footer}">© 2026 Indira trajes típicos</p>
 </footer>
+
 </body>
 </html>

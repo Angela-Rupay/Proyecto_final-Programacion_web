@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito | INDIRA</title>
+    <title th:text="#{cart.page.title}">Carrito | INDIRA</title>
 
     <link rel="stylesheet" href="/css/carrito.css">
 
@@ -20,14 +20,17 @@
     <div class="brand-section">
 
         <img src="/images/logo.png"
+             th:alt="#{cart.logo.alt}"
              alt="Logo Indira"
              class="logo-img">
 
         <img src="/images/nombre.png"
+             th:alt="#{cart.name.alt}"
              alt="Indira"
              class="name-img">
 
         <img src="/images/slogan.png"
+             th:alt="#{cart.slogan.alt}"
              alt="Slogan"
              class="slogan-img">
 
@@ -41,11 +44,11 @@
 
     <section class="cart-header">
 
-        <span>Compras</span>
+        <span th:text="#{cart.header.label}">Compras</span>
 
-        <h1>Tu carrito</h1>
+        <h1 th:text="#{cart.header.title}">Tu carrito</h1>
 
-        <p>
+        <p th:text="#{cart.header.description}">
             Visualiza los vestidos seleccionados antes de finalizar tu compra.
         </p>
 
@@ -61,11 +64,11 @@
 
                 <thead>
                 <tr>
-                    <th>Vestido</th>
-                    <th>Modelo</th>
-                    <th>Talla</th>
-                    <th>Precio</th>
-                    <th></th>
+                    <th th:text="#{cart.table.dress}">Vestido</th>
+                    <th th:text="#{cart.table.model}">Modelo</th>
+                    <th th:text="#{cart.table.size}">Talla</th>
+                    <th th:text="#{cart.table.price}">Precio</th>
+                    <th th:aria-label="#{cart.table.actions}" aria-label="Acciones"></th>
                 </tr>
                 </thead>
 
@@ -79,17 +82,18 @@
 
             <div class="summary-card">
 
-                <span>Total</span>
+                <span th:text="#{cart.summary.total}">Total</span>
 
                 <h2 id="totalPrice">$0</h2>
 
                 <div class="summary-buttons">
 
-                    <a href="/historial"
+                    <a th:href="@{/historial(lang=${#locale.language})}"
+                       href="/historial"
                        class="history-btn">
 
                         <i class="bi bi-clock-history"></i>
-                        Historial
+                        <span th:text="#{cart.button.history}">Historial</span>
 
                     </a>
 
@@ -97,7 +101,7 @@
                             class="buy-btn">
 
                         <i class="bi bi-credit-card-fill"></i>
-                        Realizar compra
+                        <span th:text="#{cart.button.buy}">Realizar compra</span>
 
                     </button>
 
@@ -116,13 +120,15 @@
 
         <i class="bi bi-cart-x-fill"></i>
 
-        <h2>Tu carrito está vacío</h2>
+        <h2 th:text="#{cart.empty.title}">Tu carrito está vacío</h2>
 
-        <p>
+        <p th:text="#{cart.empty.description}">
             Explora el catálogo y encuentra el vestido ideal para ti.
         </p>
 
-        <a href="/catalogo">
+        <a th:href="@{/catalogo(lang=${#locale.language})}"
+           href="/catalogo"
+           th:text="#{cart.empty.button}">
             Ver catálogo
         </a>
 
@@ -131,7 +137,7 @@
 </main>
 
 <footer class="footer">
-    <p>© 2026 Indira trajes típicos</p>
+    <p th:text="#{cart.footer}">© 2026 Indira trajes típicos</p>
 </footer>
 
 </body>

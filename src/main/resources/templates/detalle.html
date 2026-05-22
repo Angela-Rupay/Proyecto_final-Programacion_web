@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Detalle vestido | INDIRA</title>
+    <title th:text="#{detail.page.title}">Detalle vestido | INDIRA</title>
 
     <link rel="stylesheet" href="/css/detalle.css">
 
@@ -21,14 +21,17 @@
     <div class="brand-section">
 
         <img src="/images/logo.png"
+             th:alt="#{detail.logo.alt}"
              alt="Logo"
              class="logo-img">
 
         <img src="/images/nombre.png"
+             th:alt="#{detail.name.alt}"
              alt="Nombre"
              class="name-img">
 
         <img src="/images/slogan.png"
+             th:alt="#{detail.slogan.alt}"
              alt="Slogan"
              class="slogan-img">
 
@@ -47,14 +50,17 @@
 
             <img src="/images/logo.png"
                  class="thumbnail active"
+                 th:alt="#{detail.thumbnail.one.alt}"
                  alt="Miniatura 1">
 
             <img src="/images/logo.png"
                  class="thumbnail"
+                 th:alt="#{detail.thumbnail.two.alt}"
                  alt="Miniatura 2">
 
             <img src="/images/logo.png"
                  class="thumbnail"
+                 th:alt="#{detail.thumbnail.three.alt}"
                  alt="Miniatura 3">
 
         </aside>
@@ -64,6 +70,7 @@
 
             <img id="mainImage"
                  src="/images/logo.png"
+                 th:alt="#{detail.main.image.alt}"
                  alt="Vestido principal"
                  class="main-image">
 
@@ -72,23 +79,25 @@
         <!-- INFORMACIÓN -->
         <section class="product-column">
 
-            <span class="section-tag">
+            <span class="section-tag" th:text="#{detail.tag}">
                 Traje típico artesanal
             </span>
 
-            <h1 id="vestidoNombre">
+            <h1 id="vestidoNombre" th:text="#{detail.loading.dress}">
                 Cargando vestido...
             </h1>
 
             <div class="badges-container">
 
                 <span class="detail-badge model-badge"
-                      id="modeloBadge">
+                      id="modeloBadge"
+                      th:text="#{detail.badge.model}">
                     Modelo
                 </span>
 
                 <span class="detail-badge size-badge"
-                      id="tallaBadge">
+                      id="tallaBadge"
+                      th:text="#{detail.badge.size}">
                     Talla
                 </span>
 
@@ -101,9 +110,9 @@
 
             <div class="purchase-box">
 
-                <h3>Disponible</h3>
+                <h3 th:text="#{detail.available.title}">Disponible</h3>
 
-                <p>
+                <p th:text="#{detail.available.description}">
                     Pieza única artesanal.
                     Al completar la compra, el vestido dejará de estar disponible.
                 </p>
@@ -111,7 +120,7 @@
                 <button id="addToCartBtn"
                         class="cart-btn">
                     <i class="bi bi-cart-fill"></i>
-                    Agregar al carrito
+                    <span th:text="#{detail.add.cart}">Agregar al carrito</span>
                 </button>
 
             </div>
@@ -122,8 +131,10 @@
                     <i class="bi bi-stars"></i>
 
                     <div>
-                        <h4>Diseño artesanal</h4>
-                        <p>Confección tradicional hecha a mano.</p>
+                        <h4 th:text="#{detail.info.handmade.title}">Diseño artesanal</h4>
+                        <p th:text="#{detail.info.handmade.description}">
+                            Confección tradicional hecha a mano.
+                        </p>
                     </div>
                 </div>
 
@@ -131,8 +142,10 @@
                     <i class="bi bi-award-fill"></i>
 
                     <div>
-                        <h4>Alta calidad</h4>
-                        <p>Materiales cuidadosamente seleccionados.</p>
+                        <h4 th:text="#{detail.info.quality.title}">Alta calidad</h4>
+                        <p th:text="#{detail.info.quality.description}">
+                            Materiales cuidadosamente seleccionados.
+                        </p>
                     </div>
                 </div>
 
@@ -140,8 +153,10 @@
                     <i class="bi bi-heart-fill"></i>
 
                     <div>
-                        <h4>Diseño exclusivo</h4>
-                        <p>Cada vestido es una pieza única.</p>
+                        <h4 th:text="#{detail.info.exclusive.title}">Diseño exclusivo</h4>
+                        <p th:text="#{detail.info.exclusive.description}">
+                            Cada vestido es una pieza única.
+                        </p>
                     </div>
                 </div>
 
@@ -157,21 +172,27 @@
 
     <div class="footer-socials">
 
-        <a href="#">
+        <a href="#"
+           th:aria-label="#{detail.social.facebook}"
+           aria-label="Facebook">
             <i class="bi bi-facebook"></i>
         </a>
 
-        <a href="#">
+        <a href="#"
+           th:aria-label="#{detail.social.instagram}"
+           aria-label="Instagram">
             <i class="bi bi-instagram"></i>
         </a>
 
-        <a href="#">
+        <a href="#"
+           th:aria-label="#{detail.social.tiktok}"
+           aria-label="TikTok">
             <i class="bi bi-tiktok"></i>
         </a>
 
     </div>
 
-    <p>
+    <p th:text="#{detail.footer}">
         © 2026 Indira trajes típicos
     </p>
 

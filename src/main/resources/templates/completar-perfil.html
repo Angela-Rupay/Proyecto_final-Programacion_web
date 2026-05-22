@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completar perfil | INDIRA</title>
+    <title th:text="#{completeProfile.page.title}">Completar perfil | INDIRA</title>
 
     <link rel="stylesheet" href="/css/registro.css">
 
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <script src="/javascript/global.js" defer></script>
     <script src="/javascript/completar-perfil.js" defer></script>
 </head>
 <body>
@@ -24,15 +25,16 @@
             <div class="slider-image-wrapper">
                 <img id="sliderImage"
                      src="/images/invitacion.jpg"
+                     th:alt="#{completeProfile.slider.image.alt}"
                      alt="Figura del Sanjuanero">
             </div>
 
             <div class="slider-info">
-                <span>FIGURA DEL SANJUANERO</span>
+                <span th:text="#{completeProfile.slider.label}">FIGURA DEL SANJUANERO</span>
 
                 <div class="slider-line"></div>
 
-                <h1 id="sliderTitle">
+                <h1 id="sliderTitle" >
                     Invitación
                 </h1>
 
@@ -49,13 +51,15 @@
 
         <div class="form-container">
 
-            <span class="form-label">
+            <span class="form-label" th:text="#{completeProfile.form.label}">
                 Registro con Google
             </span>
 
-            <h2>Completar perfil</h2>
+            <h2 th:text="#{completeProfile.form.title}">Completar perfil</h2>
 
-            <p class="login-link" style="text-align:left; margin-top:-1rem; margin-bottom:1.5rem;">
+            <p class="login-link"
+               style="text-align:left; margin-top:-1rem; margin-bottom:1.5rem;"
+               th:text="#{completeProfile.form.description}">
                 Ya validamos tu cuenta con Google. Para finalizar tu registro en INDIRA,
                 necesitamos tu número de cédula y teléfono.
             </p>
@@ -63,13 +67,13 @@
             <div class="google-summary">
                 <p>
                     <i class="bi bi-person-check-fill"></i>
-                    <strong>Nombre:</strong>
+                    <strong th:text="#{completeProfile.google.name}">Nombre:</strong>
                     <span id="nombreGoogle">Cargando...</span>
                 </p>
 
                 <p>
                     <i class="bi bi-envelope-fill"></i>
-                    <strong>Correo:</strong>
+                    <strong th:text="#{completeProfile.google.email}">Correo:</strong>
                     <span id="correoGoogle">Cargando...</span>
                 </p>
             </div>
@@ -79,11 +83,12 @@
                 <div class="input-group">
                     <label>
                         <i class="bi bi-credit-card-2-front-fill"></i>
-                        Número de cédula
+                        <span th:text="#{completeProfile.document.label}">Número de cédula</span>
                     </label>
 
                     <input type="text"
                            id="documento"
+                           th:placeholder="#{completeProfile.document.placeholder}"
                            placeholder="1234567890"
                            required>
                 </div>
@@ -91,11 +96,12 @@
                 <div class="input-group">
                     <label>
                         <i class="bi bi-telephone-fill"></i>
-                        Teléfono
+                        <span th:text="#{completeProfile.phone.label}">Teléfono</span>
                     </label>
 
                     <input type="text"
                            id="telefono"
+                           th:placeholder="#{completeProfile.phone.placeholder}"
                            placeholder="3XXXXXXXXX"
                            required>
                 </div>
@@ -109,25 +115,28 @@
                         disabled>
 
                     <i class="bi bi-check-circle-fill"></i>
-                    Finalizar registro
+                    <span th:text="#{completeProfile.button.finish}">Finalizar registro</span>
 
                 </button>
 
             </form>
 
             <p class="login-link">
-                ¿Prefieres usar otra cuenta?
+                <span th:text="#{completeProfile.other.account}">¿Prefieres usar otra cuenta?</span>
 
-                <a href="/login">
+                <a th:href="@{/login(lang=${#locale.language})}"
+                   href="/login"
+                   th:text="#{completeProfile.back.login}">
                     Volver al login
                 </a>
             </p>
 
-            <a href="/"
+            <a th:href="@{/(lang=${#locale.language})}"
+               href="/"
                class="back-home">
 
                 <i class="bi bi-arrow-left"></i>
-                Volver al inicio
+                <span th:text="#{completeProfile.back.home}">Volver al inicio</span>
 
             </a>
 
@@ -145,26 +154,26 @@
 
         <i class="bi bi-check-circle-fill"></i>
 
-        <h2>Perfil completado</h2>
+        <h2 th:text="#{completeProfile.modal.title}">Perfil completado</h2>
 
-        <p>
+        <p th:text="#{completeProfile.modal.description}">
             Tu cuenta fue creada correctamente con Google.
         </p>
 
         <div class="modal-buttons">
 
-            <a href="/catalogo"
-               class="modal-btn primary">
-
+            <a th:href="@{/catalogo(lang=${#locale.language})}"
+               href="/catalogo"
+               class="modal-btn primary"
+               th:text="#{completeProfile.modal.catalog}">
                 Ver catálogo
-
             </a>
 
-            <a href="/"
-               class="modal-btn secondary">
-
+            <a th:href="@{/(lang=${#locale.language})}"
+               href="/"
+               class="modal-btn secondary"
+               th:text="#{completeProfile.modal.home}">
                 Ir al inicio
-
             </a>
 
         </div>
