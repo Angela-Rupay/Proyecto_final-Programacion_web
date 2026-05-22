@@ -287,6 +287,69 @@ body{
     padding:1.4rem;
 }
 
+.delivery-section {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.delivery-section h2,
+.payment-form-section h2 {
+    margin: 0 0 14px;
+    color: var(--color-dorado, #d6a84f);
+    font-size: 1.15rem;
+}
+
+.delivery-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(214, 168, 79, 0.12);
+    color: #fff;
+    line-height: 1.45;
+    font-size: 0.92rem;
+}
+
+.delivery-note i {
+    color: var(--color-dorado, #d6a84f);
+    margin-top: 2px;
+}
+
+.editable-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.editable-input input {
+    flex: 1;
+}
+
+.edit-address-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-dorado, #d6a84f);
+    color: #082f3a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-address-btn:hover {
+    filter: brightness(1.08);
+}
+
+.readonly-field {
+    opacity: 0.78;
+    cursor: default;
+}
+
 @keyframes fadeUp{
     from{
         opacity:0;

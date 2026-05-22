@@ -9,26 +9,107 @@ const tallaFilter = document.getElementById("tallaFilter");
 let modeloSeleccionado = "todos";
 let tallaSeleccionada = "todos";
 
-const modelDescriptions = {
-    todos: {
-        title: "Todos los vestidos",
-        text: "Visualiza todos los diseños disponibles actualmente."
+const catalogI18n = {
+    es: {
+        availableDresses: "Vestidos disponibles",
+        sizeDresses: "Vestidos talla {size}",
+        sizeLabel: "Talla {size}",
+        detailsButton: "Ver detalles",
+        productSingular: "producto",
+        productPlural: "productos",
+        errorTitle: "No se pudo cargar el catálogo",
+        errorText: "Verifica que el servidor esté funcionando correctamente.",
+        imageAlt: "Imagen del vestido {name}",
+        modelDescriptions: {
+            todos: {
+                title: "Todos los vestidos",
+                text: "Visualiza todos los diseños disponibles actualmente."
+            },
+            TT: {
+                title: "Modelo Tradicional",
+                text: "Diseños clásicos inspirados en la esencia del Sanjuanero Huilense."
+            },
+            TF: {
+                title: "Modelo Fantasía",
+                text: "Vestidos llamativos, coloridos y elegantes para destacar en escena."
+            },
+            P: {
+                title: "Modelo Pintado",
+                text: "Piezas con detalles artísticos y acabados llenos de expresión cultural."
+            },
+            TPRO: {
+                title: "Modelo Profesional",
+                text: "Trajes elaborados para concursos, presentaciones y eventos especiales."
+            }
+        }
     },
-    TT: {
-        title: "Modelo Tradicional",
-        text: "Diseños clásicos inspirados en la esencia del Sanjuanero Huilense."
+
+    en: {
+        availableDresses: "Available dresses",
+        sizeDresses: "Size {size} dresses",
+        sizeLabel: "Size {size}",
+        detailsButton: "See details",
+        productSingular: "product",
+        productPlural: "products",
+        errorTitle: "The catalog could not be loaded",
+        errorText: "Check that the server is running correctly.",
+        imageAlt: "Image of dress {name}",
+        modelDescriptions: {
+            todos: {
+                title: "All dresses",
+                text: "View all currently available designs."
+            },
+            TT: {
+                title: "Traditional Model",
+                text: "Classic designs inspired by the essence of the Huilense Sanjuanero."
+            },
+            TF: {
+                title: "Fantasy Model",
+                text: "Eye-catching, colorful, and elegant dresses made to stand out on stage."
+            },
+            P: {
+                title: "Painted Model",
+                text: "Pieces with artistic details and finishes full of cultural expression."
+            },
+            TPRO: {
+                title: "Professional Model",
+                text: "Dresses designed for contests, performances, and special events."
+            }
+        }
     },
-    TF: {
-        title: "Modelo Fantasía",
-        text: "Vestidos llamativos, coloridos y elegantes para destacar en escena."
-    },
-    P: {
-        title: "Modelo Pintado",
-        text: "Piezas con detalles artísticos y acabados llenos de expresión cultural."
-    },
-    TPRO: {
-        title: "Modelo Profesional",
-        text: "Trajes elaborados para concursos, presentaciones y eventos especiales."
+
+    pt: {
+        availableDresses: "Vestidos disponíveis",
+        sizeDresses: "Vestidos tamanho {size}",
+        sizeLabel: "Tamanho {size}",
+        detailsButton: "Ver detalhes",
+        productSingular: "produto",
+        productPlural: "produtos",
+        errorTitle: "Não foi possível carregar o catálogo",
+        errorText: "Verifique se o servidor está funcionando corretamente.",
+        imageAlt: "Imagem do vestido {name}",
+        modelDescriptions: {
+            todos: {
+                title: "Todos os vestidos",
+                text: "Veja todos os designs disponíveis atualmente."
+            },
+            TT: {
+                title: "Modelo Tradicional",
+                text: "Designs clássicos inspirados na essência do Sanjuanero Huilense."
+            },
+            TF: {
+                title: "Modelo Fantasia",
+                text: "Vestidos chamativos, coloridos e elegantes para se destacar no palco."
+            },
+            P: {
+                title: "Modelo Pintado",
+                text: "Peças com detalhes artísticos e acabamentos cheios de expressão cultural."
+            },
+            TPRO: {
+                title: "Modelo Profissional",
+                text: "Trajes elaborados para concursos, apresentações e eventos especiais."
+            }
+        }
     }
 };
 
@@ -36,6 +117,40 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarVestidos();
     configurarFiltros();
 });
+
+function idiomaActualCatalogo() {
+    if (typeof obtenerIdiomaActual === "function") {
+        return obtenerIdiomaActual();
+    }
+
+    return localStorage.getItem("lang") || "es";
+}
+
+function tCatalogo(clave) {
+    const idioma = idiomaActualCatalogo();
+    return catalogI18n[idioma]?.[clave] || catalogI18n.es[clave] || clave;
+}
+
+function reemplazarVariables(texto, variables) {
+    let resultado = texto;
+
+    Object.keys(variables).forEach(clave => {
+        resultado = resultado.replace(`{${clave}}`, variables[clave]);
+    });
+
+    return resultado;
+}
+
+function obtenerDescripcionModelo(modelo) {
+    const idioma = idiomaActualCatalogo();
+    return catalogI18n[idioma]?.modelDescriptions?.[modelo]
+        || catalogI18n.es.modelDescriptions[modelo];
+}
+
+function construirUrlDetalle(idVestido) {
+    const lang = idiomaActualCatalogo();
+    return `/detalle?id=${idVestido}&lang=${lang}`;
+}
 
 function configurarFiltros() {
     filterButtons.forEach(button => {
@@ -62,19 +177,38 @@ async function cargarVestidosFiltrados() {
 
         if (modeloSeleccionado !== "todos" && tallaSeleccionada !== "todos") {
             url = `/api/vestidos/modelo/${modeloSeleccionado}/talla/${tallaSeleccionada}`;
-            catalogTitle.textContent = `${modelDescriptions[modeloSeleccionado].title} - Talla ${tallaSeleccionada}`;
+
+            const infoModelo = obtenerDescripcionModelo(modeloSeleccionado);
+            const textoTalla = reemplazarVariables(tCatalogo("sizeLabel"), {
+                size: tallaSeleccionada
+            });
+
+            catalogTitle.textContent = `${infoModelo.title} - ${textoTalla}`;
+
         } else if (modeloSeleccionado !== "todos") {
             url = `/api/vestidos/modelo/${modeloSeleccionado}`;
-            catalogTitle.textContent = modelDescriptions[modeloSeleccionado].title;
+
+            const infoModelo = obtenerDescripcionModelo(modeloSeleccionado);
+            catalogTitle.textContent = infoModelo.title;
+
         } else if (tallaSeleccionada !== "todos") {
             url = `/api/vestidos/talla/${tallaSeleccionada}`;
-            catalogTitle.textContent = `Vestidos talla ${tallaSeleccionada}`;
+
+            catalogTitle.textContent = reemplazarVariables(tCatalogo("sizeDresses"), {
+                size: tallaSeleccionada
+            });
+
         } else {
             url = "/api/vestidos";
-            catalogTitle.textContent = "Vestidos disponibles";
+            catalogTitle.textContent = tCatalogo("availableDresses");
         }
 
         const response = await fetch(url);
+
+        if (manejarRespuestaNoAutorizada && manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
+
         const vestidos = await response.json();
 
         renderizarVestidos(vestidos);
@@ -88,9 +222,15 @@ async function cargarVestidosFiltrados() {
 async function cargarVestidos() {
     try {
         const response = await fetch("/api/vestidos");
+
+        if (manejarRespuestaNoAutorizada && manejarRespuestaNoAutorizada(response)) {
+            return;
+        }
+
         const vestidos = await response.json();
 
-        catalogTitle.textContent = "Vestidos disponibles";
+        catalogTitle.textContent = tCatalogo("availableDresses");
+        actualizarInfoModelo("todos");
         renderizarVestidos(vestidos);
 
     } catch (error) {
@@ -102,7 +242,12 @@ async function cargarVestidos() {
 function renderizarVestidos(vestidos) {
     productsGrid.innerHTML = "";
 
-    productCount.textContent = `${vestidos.length} producto${vestidos.length !== 1 ? "s" : ""}`;
+    const cantidad = vestidos.length;
+    const palabraProducto = cantidad === 1
+        ? tCatalogo("productSingular")
+        : tCatalogo("productPlural");
+
+    productCount.textContent = `${cantidad} ${palabraProducto}`;
 
     if (vestidos.length === 0) {
         emptyMessage.style.display = "block";
@@ -115,10 +260,18 @@ function renderizarVestidos(vestidos) {
         const card = document.createElement("article");
         card.classList.add("product-card");
 
+        const altImagen = reemplazarVariables(tCatalogo("imageAlt"), {
+            name: vestido.nombre
+        });
+
+        const textoTalla = reemplazarVariables(tCatalogo("sizeLabel"), {
+            size: vestido.talla
+        });
+
         card.innerHTML = `
             <div class="product-img-container">
                <img src="/images/vestidos/${vestido.idVestido}-1.jpg"
-                 alt="${vestido.nombre}"
+                 alt="${altImagen}"
                  onerror="this.src='/images/logo.png'">
             </div>
 
@@ -126,14 +279,14 @@ function renderizarVestidos(vestidos) {
                 <h3>${vestido.nombre}</h3>
 
                 <div class="product-details">
-                    <span class="badge">Talla ${vestido.talla}</span>
+                    <span class="badge">${textoTalla}</span>
                     <span class="badge">${vestido.nombreModelo}</span>
                 </div>
 
                 <p class="price">${formatearPrecio(vestido.precioBase)}</p>
 
-                <a href="/detalle?id=${vestido.idVestido}" class="details-btn">
-                    Ver detalles
+                <a href="${construirUrlDetalle(vestido.idVestido)}" class="details-btn">
+                    ${tCatalogo("detailsButton")}
                 </a>
             </div>
         `;
@@ -143,7 +296,7 @@ function renderizarVestidos(vestidos) {
 }
 
 function actualizarInfoModelo(modelo) {
-    const info = modelDescriptions[modelo];
+    const info = obtenerDescripcionModelo(modelo);
 
     modelInfo.innerHTML = `
         <h3>${info.title}</h3>
@@ -152,7 +305,15 @@ function actualizarInfoModelo(modelo) {
 }
 
 function formatearPrecio(valor) {
-    return new Intl.NumberFormat("es-CO", {
+    const idioma = idiomaActualCatalogo();
+
+    const localePorIdioma = {
+        es: "es-CO",
+        en: "en-US",
+        pt: "pt-BR"
+    };
+
+    return new Intl.NumberFormat(localePorIdioma[idioma] || "es-CO", {
         style: "currency",
         currency: "COP",
         minimumFractionDigits: 0
@@ -161,11 +322,11 @@ function formatearPrecio(valor) {
 
 function mostrarError() {
     productsGrid.innerHTML = "";
-    productCount.textContent = "0 productos";
+    productCount.textContent = `0 ${tCatalogo("productPlural")}`;
     emptyMessage.style.display = "block";
     emptyMessage.innerHTML = `
         <i class="bi bi-exclamation-triangle-fill"></i>
-        <h3>No se pudo cargar el catálogo</h3>
-        <p>Verifica que el servidor esté funcionando correctamente.</p>
+        <h3>${tCatalogo("errorTitle")}</h3>
+        <p>${tCatalogo("errorText")}</p>
     `;
 }

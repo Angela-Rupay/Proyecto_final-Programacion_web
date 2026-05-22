@@ -17,7 +17,9 @@
         apellido: params.get("apellido"),
         correo: params.get("correo"),
         rol: params.get("rol"),
-        token: params.get("token")
+        token: params.get("token"),
+        direccion: params.get("direccion"),
+        barrio: params.get("barrio")
     };
 
     if (usuario.success && usuario.token && usuario.correo && usuario.rol) {

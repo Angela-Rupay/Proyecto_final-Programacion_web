@@ -50,75 +50,129 @@
 
         <form class="payment-card" id="paymentForm">
 
-            <div class="input-group">
-                <label for="titular">
-                    <i class="bi bi-person-fill"></i>
-                    <span th:text="#{payment.cardholder.label}">Nombre del titular</span>
-                </label>
+            <section class="payment-form-section">
+                <h2 th:text="#{payment.card.section.title}">Datos de pago</h2>
 
-                <input type="text"
-                       id="titular"
-                       th:placeholder="#{payment.cardholder.placeholder}"
-                       placeholder="Nombre completo"
-                       required>
-            </div>
-
-            <div class="input-group">
-                <label for="tarjeta">
-                    <i class="bi bi-credit-card-fill"></i>
-                    <span th:text="#{payment.card.number.label}">Número de tarjeta</span>
-                </label>
-
-                <input type="text"
-                       id="tarjeta"
-                       maxlength="19"
-                       th:placeholder="#{payment.card.number.placeholder}"
-                       placeholder="0000 0000 0000 0000"
-                       required>
-            </div>
-
-            <div class="input-grid">
                 <div class="input-group">
-                    <label for="fecha">
-                        <i class="bi bi-calendar2-week-fill"></i>
-                        <span th:text="#{payment.expiration.label}">Vencimiento</span>
+                    <label for="titular">
+                        <i class="bi bi-person-fill"></i>
+                        <span th:text="#{payment.cardholder.label}">Nombre del titular</span>
                     </label>
 
                     <input type="text"
-                           id="fecha"
-                           maxlength="5"
-                           th:placeholder="#{payment.expiration.placeholder}"
-                           placeholder="MM/AA"
+                           id="titular"
+                           th:placeholder="#{payment.cardholder.placeholder}"
+                           placeholder="Nombre completo"
                            required>
                 </div>
 
                 <div class="input-group">
-                    <label for="cvv">
-                        <i class="bi bi-shield-lock-fill"></i>
-                        <span th:text="#{payment.cvv.label}">CVV</span>
+                    <label for="tarjeta">
+                        <i class="bi bi-credit-card-fill"></i>
+                        <span th:text="#{payment.card.number.label}">Número de tarjeta</span>
                     </label>
 
-                    <input type="password"
-                           id="cvv"
-                           maxlength="3"
-                           th:placeholder="#{payment.cvv.placeholder}"
-                           placeholder="123"
+                    <input type="text"
+                           id="tarjeta"
+                           maxlength="19"
+                           th:placeholder="#{payment.card.number.placeholder}"
+                           placeholder="0000 0000 0000 0000"
                            required>
                 </div>
-            </div>
 
-            <div class="input-group">
-                <label for="direccion">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    <span th:text="#{payment.address.label}">Dirección de entrega</span>
-                </label>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="fecha">
+                            <i class="bi bi-calendar2-week-fill"></i>
+                            <span th:text="#{payment.expiration.label}">Vencimiento</span>
+                        </label>
 
-                <input type="text"
-                       id="direccion"
-                       th:placeholder="#{payment.address.placeholder}"
-                       placeholder="Dirección de entrega"
-                       required>
-            </div>
+                        <input type="text"
+                               id="fecha"
+                               maxlength="5"
+                               th:placeholder="#{payment.expiration.placeholder}"
+                               placeholder="MM/AA"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cvv">
+                            <i class="bi bi-shield-lock-fill"></i>
+                            <span th:text="#{payment.cvv.label}">CVV</span>
+                        </label>
+
+                        <input type="password"
+                               id="cvv"
+                               maxlength="3"
+                               th:placeholder="#{payment.cvv.placeholder}"
+                               placeholder="123"
+                               required>
+                    </div>
+                </div>
+            </section>
+
+            <section class="delivery-section">
+                <h2 th:text="#{payment.delivery.title}">Datos de envío</h2>
+
+                <p class="delivery-note">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <span th:text="#{payment.delivery.note}">
+            Actualmente solo realizamos envíos dentro de la ciudad de Neiva.
+        </span>
+                </p>
+
+                <div class="input-group">
+                    <label for="direccion">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span th:text="#{payment.address.label}">Dirección de entrega</span>
+                    </label>
+
+                    <div class="editable-input">
+                        <input type="text"
+                               id="direccion"
+                               th:placeholder="#{payment.address.placeholder}"
+                               placeholder="Ej: Carrera 12 # 14-83"
+                               required>
+
+                        <button type="button"
+                                class="edit-address-btn"
+                                id="editAddressBtn"
+                                th:title="#{payment.address.edit}"
+                                th:aria-label="#{payment.address.edit}"
+                                title="Editar dirección"
+                                aria-label="Editar dirección">
+
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="barrio">
+                        <i class="bi bi-signpost-fill"></i>
+                        <span th:text="#{payment.neighborhood.label}">Barrio</span>
+                    </label>
+
+                    <div class="editable-input">
+                        <input type="text"
+                               id="barrio"
+                               th:placeholder="#{payment.neighborhood.placeholder}"
+                               placeholder="Ej: Chapinero"
+                               required>
+
+                        <button type="button"
+                                class="edit-address-btn"
+                                id="editNeighborhoodBtn"
+                                th:title="#{payment.neighborhood.edit}"
+                                th:aria-label="#{payment.neighborhood.edit}"
+                                title="Editar barrio"
+                                aria-label="Editar barrio">
+
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
             <div class="message-box" id="messageBox"></div>
 

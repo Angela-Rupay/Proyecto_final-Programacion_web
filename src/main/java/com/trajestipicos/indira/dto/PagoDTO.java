@@ -11,4 +11,5 @@ public class PagoDTO {
     private String fechaVencimiento;
     private String cvv;
     private String direccion;
+    private String barrio;
 }

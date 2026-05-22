@@ -67,8 +67,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                     + "&apellido=" + encode(usuario.getApellido())
                     + "&correo=" + encode(usuario.getCorreo())
                     + "&rol=" + encode(usuario.getRol().getTipoRol())
+                    + "&direccion=" + encode(usuario.getDireccion())
+                    + "&barrio=" + encode(usuario.getBarrio())
                     + "&token=" + encode(token);
-
             response.sendRedirect(redirectUrl);
             return;
         }

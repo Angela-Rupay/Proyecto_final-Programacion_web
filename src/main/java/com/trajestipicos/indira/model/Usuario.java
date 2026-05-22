@@ -50,4 +50,10 @@ public class Usuario {
 
     @Column(unique = true)
     private String googleId;
+
+    @Column(nullable = true, length = 150)
+    private String direccion;
+
+    @Column(nullable = true, length = 100)
+    private String barrio;
 }

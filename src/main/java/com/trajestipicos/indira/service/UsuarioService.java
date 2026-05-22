@@ -72,6 +72,8 @@ public class UsuarioService {
                     null,
                     null,
                     null,
+                    null,
+                    null,
                     null
             );
         }
@@ -80,6 +82,8 @@ public class UsuarioService {
             return new LoginResponseDTO(
                     false,
                     "Contraseña incorrecta",
+                    null,
+                    null,
                     null,
                     null,
                     null,
@@ -99,7 +103,9 @@ public class UsuarioService {
                 usuario.getApellido(),
                 usuario.getCorreo(),
                 usuario.getRol().getTipoRol(),
-                token
+                token,
+                usuario.getDireccion(),
+                usuario.getBarrio()
         );
     }
 
@@ -127,8 +133,6 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
 
-        usuarioRepository.save(usuario);
-
         return new ApiResponse(true, "Administrador registrado correctamente");
     }
 
@@ -138,6 +142,8 @@ public class UsuarioService {
             return new LoginResponseDTO(
                     false,
                     "El documento es obligatorio",
+                    null,
+                    null,
                     null,
                     null,
                     null,
@@ -156,6 +162,8 @@ public class UsuarioService {
                     null,
                     null,
                     null,
+                    null,
+                    null,
                     null
             );
         }
@@ -164,6 +172,8 @@ public class UsuarioService {
             return new LoginResponseDTO(
                     false,
                     "El correo de Google es obligatorio",
+                    null,
+                    null,
                     null,
                     null,
                     null,
@@ -182,7 +192,10 @@ public class UsuarioService {
                     null,
                     null,
                     null,
+                    null,
+                    null,
                     null
+
             );
         }
 
@@ -190,6 +203,8 @@ public class UsuarioService {
             return new LoginResponseDTO(
                     false,
                     "Ya existe un usuario con ese documento",
+                    null,
+                    null,
                     null,
                     null,
                     null,
@@ -208,7 +223,10 @@ public class UsuarioService {
                     null,
                     null,
                     null,
+                    null,
+                    null,
                     null
+
             );
         }
 
@@ -239,7 +257,10 @@ public class UsuarioService {
                 usuario.getApellido(),
                 usuario.getCorreo(),
                 usuario.getRol().getTipoRol(),
-                token
+                token,
+                usuario.getDireccion(),
+                usuario.getBarrio()
         );
+
     }
 }
