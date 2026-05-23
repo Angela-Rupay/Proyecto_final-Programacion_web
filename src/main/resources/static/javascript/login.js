@@ -41,24 +41,25 @@ function configurarPassword(){
 
 }
 
-function verificarSesion(){
+function verificarSesion() {
 
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const params = new URLSearchParams(window.location.search);
+    const cambiarCuenta = params.get("cambiarCuenta");
 
-    if(usuario){
-
-        if(usuario.rol === "ADMIN"){
-
-            window.location.href = "/admin";
-
-        }else{
-
-            window.location.href = "/catalogo";
-
-        }
-
+    if (cambiarCuenta === "true") {
+        localStorage.removeItem("usuario");
+        return;
     }
 
+    const usuario = obtenerUsuarioLogueado();
+
+    if (usuario) {
+        if (usuario.rol === "ADMIN") {
+            window.location.href = `/admin?lang=${obtenerIdiomaActual()}`;
+        } else if (usuario.rol === "CLIENTE") {
+            window.location.href = `/catalogo?lang=${obtenerIdiomaActual()}`;
+        }
+    }
 }
 
 loginForm.addEventListener("submit", async (e) => {
@@ -92,18 +93,15 @@ loginForm.addEventListener("submit", async (e) => {
 
             mostrarMensaje(data.message, "success");
 
+            localStorage.removeItem("usuario");
             localStorage.setItem("usuario", JSON.stringify(data));
 
             setTimeout(() => {
 
                 if(data.rol === "ADMIN"){
-
-                    window.location.href = "/admin";
-
+                    window.location.href = `/admin?lang=${obtenerIdiomaActual ? obtenerIdiomaActual() : "es"}`;
                 }else{
-
-                    window.location.href = "/catalogo";
-
+                    window.location.href = `/catalogo?lang=${obtenerIdiomaActual ? obtenerIdiomaActual() : "es"}`;
                 }
 
             }, 1300);

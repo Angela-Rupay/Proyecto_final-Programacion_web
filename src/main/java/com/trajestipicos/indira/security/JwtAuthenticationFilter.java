@@ -48,10 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String correo = jwtService.obtenerCorreo(token);
 
-            if (
-                    correo != null &&
-                            SecurityContextHolder.getContext().getAuthentication() == null
-            ) {
+            if (correo != null) {
                 Usuario usuario = usuarioRepository.findByCorreo(correo)
                         .orElse(null);
 
@@ -59,9 +56,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                     String rol = usuario.getRol().getTipoRol();
 
+                    rol = rol.trim().toUpperCase();
+
+                    if (rol.startsWith("ROLE_")) {
+                        rol = rol.substring(5);
+                    }
+                    System.out.println("JWT correo: " + correo);
+                    System.out.println("JWT rol BD: " + usuario.getRol().getTipoRol());
+                    System.out.println("JWT authority final: ROLE_" + rol);
+                    System.out.println("Ruta solicitada: " + request.getRequestURI());
+
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(
-                                    usuario,
+                                    usuario.getCorreo(),
                                     null,
                                     List.of(new SimpleGrantedAuthority("ROLE_" + rol))
                             );

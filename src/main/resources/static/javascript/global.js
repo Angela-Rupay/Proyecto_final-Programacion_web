@@ -153,7 +153,8 @@ function configurarLogout() {
 
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("usuario");
-        window.location.href = `/login?lang=${obtenerIdiomaActual()}`;
+        sessionStorage.clear();
+        window.location.href = `/login?cambiarCuenta=true&lang=${obtenerIdiomaActual()}`;
     });
 }
 
