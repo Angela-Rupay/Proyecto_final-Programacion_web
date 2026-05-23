@@ -69,6 +69,20 @@ function renderizarProductos(productos) {
                     Eliminar
                 </button>
             `;
+        const botonEditar = vendido
+            ? `
+        <button class="edit-btn disabled" disabled>
+            <i class="bi bi-lock-fill"></i>
+            No editable
+        </button>
+    `
+            : `
+        <button class="edit-btn"
+                onclick="editarProducto(${producto.idVestido})">
+            <i class="bi bi-pencil-fill"></i>
+            Editar
+        </button>
+    `;
 
         const card = document.createElement("article");
         card.classList.add("product-card");
@@ -96,15 +110,14 @@ function renderizarProductos(productos) {
                 <p class="price">
                     ${formatearPrecio(producto.precioBase)}
                 </p>
-
+                
                 <div class="buttons">
-                    <button class="edit-btn"
-                            onclick="editarProducto(${producto.idVestido})">
-                        <i class="bi bi-pencil-fill"></i>
-                        Editar
-                    </button>
+                  ${botonEditar}
+                  ${botonEliminar}
+                  </div>
 
-                    ${botonEliminar}
+               
+
                 </div>
             </div>
         `;

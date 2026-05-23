@@ -103,9 +103,9 @@ public class UsuarioService {
                 usuario.getApellido(),
                 usuario.getCorreo(),
                 usuario.getRol().getTipoRol(),
-                token,
                 usuario.getDireccion(),
-                usuario.getBarrio()
+                usuario.getBarrio(),
+                token
         );
     }
 
@@ -257,9 +257,9 @@ public class UsuarioService {
                 usuario.getApellido(),
                 usuario.getCorreo(),
                 usuario.getRol().getTipoRol(),
-                token,
                 usuario.getDireccion(),
-                usuario.getBarrio()
+                usuario.getBarrio(),
+                token
         );
 
     }

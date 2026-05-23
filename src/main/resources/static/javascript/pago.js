@@ -4,7 +4,6 @@ const tarjetaInput = document.getElementById("tarjeta");
 const fechaInput = document.getElementById("fecha");
 const cvvInput = document.getElementById("cvv");
 const direccionInput = document.getElementById("direccion");
-const barrioInput = document.getElementById("barrio");
 const messageBox = document.getElementById("messageBox");
 const successModal = document.getElementById("successModal");
 const summaryTotal = document.getElementById("summaryTotal");
