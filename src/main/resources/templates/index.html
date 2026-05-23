@@ -147,7 +147,9 @@
     </section>
 
     <section class="contact-section">
+
         <div class="contact-info">
+
             <div class="section-title left">
                 <span th:text="#{index.location.label}">Ubicación</span>
                 <h2 th:text="#{index.location.title}">Visítanos en Neiva</h2>
@@ -156,11 +158,12 @@
             <p>
                 <strong th:text="#{index.location.label}">Ubicación</strong>:
                 <span th:text="#{index.location.text}">
-                    Carrera 12 # 14-83, barrio Chapinero. Diagonal al colegio nacional Santa Librada.
-                </span>
+                Carrera 12 # 14-83, barrio Chapinero. Diagonal al colegio nacional Santa Librada.
+            </span>
             </p>
 
             <div class="social-links">
+
                 <a href="https://www.facebook.com/profile.php?id=61589586573348"
                    target="_blank"
                    rel="noopener noreferrer"
@@ -185,15 +188,29 @@
                     <i class="bi bi-tiktok"></i>
                 </a>
 
-                <a href="https://wa.me/573163535754?text=Me%20gustar%C3%ADa%20encargar%20un%20traje%20de%20sanjuanero%20personalizado."
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="whatsapp-btn">
-                    <i class="bi bi-whatsapp"></i>
-                    <span th:text="#{index.whatsapp}">Contáctanos por WhatsApp</span>
-                </a>
-             </div>
             </div>
+
+            <a href="https://wa.me/573163535754?text=Me%20gustar%C3%ADa%20encargar%20un%20traje%20de%20sanjuanero%20personalizado."
+               target="_blank"
+               rel="noopener noreferrer"
+               class="whatsapp-btn">
+                <i class="bi bi-whatsapp"></i>
+                <span th:text="#{index.whatsapp}">Contáctanos por WhatsApp</span>
+            </a>
+
+        </div>
+
+        <div class="map-container">
+            <iframe
+                    th:title="#{index.map.title}"
+                    title="Mapa de ubicación de INDIRA Trajes Típicos"
+                    src="https://www.google.com/maps?q=Carrera%2012%20%2314-83%20Neiva%20Huila&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </section>
 
         <div class="map-container">
             <iframe>
