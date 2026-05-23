@@ -181,38 +181,6 @@ public class VestidoService {
         }
     }
 
-    public ApiResponse cambiarEstadoVestido(Long idVestido, boolean activo) {
-        Vestido vestido = vestidoRepository.findById(idVestido)
-                .orElseThrow(() -> new RuntimeException("Vestido no encontrado"));
-
-        vestido.setActivo(activo);
-        vestidoRepository.save(vestido);
-
-        return new ApiResponse(
-                true,
-                activo ? "Vestido activado correctamente" : "Vestido desactivado correctamente"
-        );
-    }
-
-    public ApiResponse desactivarVestido(Long idVestido) {
-        return cambiarEstadoVestido(idVestido, false);
-    }
-
-    public ApiResponse activarVestido(Long idVestido) {
-
-        boolean fueVendido = detalleVentaRepository.existsByVestido_IdVestido(idVestido);
-
-        if (fueVendido) {
-            return new ApiResponse(
-                    false,
-                    "Este vestido ya fue vendido y no puede volver a activarse"
-            );
-        }
-
-        return cambiarEstadoVestido(idVestido, true);
-    }
-
-
     private void guardarImagenSiExiste(
             MultipartFile archivo,
             Long idVestido,
@@ -234,5 +202,44 @@ public class VestidoService {
                 destino,
                 StandardCopyOption.REPLACE_EXISTING
         );
+    }
+
+    private void eliminarImagenSiExiste(Long idVestido, int numeroImagen) throws IOException {
+        Path imagen = CARPETA_IMAGENES.resolve(idVestido + "-" + numeroImagen + ".jpg");
+
+        if (Files.exists(imagen)) {
+            Files.delete(imagen);
+        }
+    }
+
+    public ApiResponse eliminarVestido(Long idVestido) {
+        Vestido vestido = vestidoRepository.findById(idVestido)
+                .orElse(null);
+
+        if (vestido == null) {
+            return new ApiResponse(false, "Vestido no encontrado");
+        }
+
+        boolean fueVendido = detalleVentaRepository.existsByVestido_IdVestido(idVestido);
+
+        if (fueVendido) {
+            return new ApiResponse(
+                    false,
+                    "Este vestido ya fue vendido y no puede eliminarse del historial"
+            );
+        }
+
+        try {
+            eliminarImagenSiExiste(idVestido, 1);
+            eliminarImagenSiExiste(idVestido, 2);
+            eliminarImagenSiExiste(idVestido, 3);
+
+            vestidoRepository.delete(vestido);
+
+            return new ApiResponse(true, "Vestido eliminado correctamente");
+
+        } catch (Exception e) {
+            return new ApiResponse(false, "Error eliminando el vestido");
+        }
     }
 }

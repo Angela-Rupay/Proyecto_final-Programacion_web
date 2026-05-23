@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/vestidos")
-@Tag(name = "Administración de vestidos", description = "Endpoints para crear, editar, activar y desactivar vestidos")
+@Tag(name = "Administración de vestidos", description = "Endpoints para crear, editar, listar y eliminar vestidos")
 public class AdminVestidoController {
 
     private final VestidoService vestidoService;
@@ -101,21 +101,9 @@ public class AdminVestidoController {
         );
     }
 
-    @Operation(summary = "Desactivar un vestido del catálogo")
-    @PatchMapping("/{idVestido}/desactivar")
-    public ApiResponse desactivarVestido(@PathVariable Long idVestido) {
-        return vestidoService.desactivarVestido(idVestido);
-    }
-
-    @Operation(summary = "Activar un vestido del catálogo")
-    @PatchMapping("/{idVestido}/activar")
-    public ApiResponse activarVestido(@PathVariable Long idVestido) {
-        return vestidoService.activarVestido(idVestido);
-    }
-
-    @Operation(summary = "Desactivar un vestido del catálogo")
+    @Operation(summary = "Eliminar un vestido no vendido")
     @DeleteMapping("/{idVestido}")
-    public ApiResponse eliminarLogicoVestido(@PathVariable Long idVestido) {
-        return vestidoService.desactivarVestido(idVestido);
+    public ApiResponse eliminarVestido(@PathVariable Long idVestido) {
+        return vestidoService.eliminarVestido(idVestido);
     }
 }

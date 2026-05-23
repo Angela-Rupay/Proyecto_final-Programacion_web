@@ -161,14 +161,26 @@ body{
     color:var(--color-principal-oscuro);
 }
 
-.badge.active{
-    background-color:rgba(56,176,0,.15);
-    color:var(--color-success);
+.delete-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 10px 14px;
+    background: #b91c1c;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 }
 
-.badge.inactive{
-    background-color:rgba(255,77,109,.15);
-    color:var(--color-danger);
+.delete-btn:hover {
+    background: #991b1b;
+}
+
+.delete-btn.disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
 }
 
 .price{
