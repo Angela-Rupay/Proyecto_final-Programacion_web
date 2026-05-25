@@ -28,11 +28,6 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
 
-                /*
-                 * IMPORTANTE:
-                 * JWT puede trabajar sin sesión, pero OAuth2 con Google necesita una sesión temporal
-                 * para guardar el estado entre la salida hacia Google y el regreso al backend.
-                 */
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
@@ -55,10 +50,7 @@ public class SecurityConfig {
                                 "/pago",
                                 "/sin-permisos",
                                 "/error",
-
-                                // Esta vista la usaremos luego para completar documento y teléfono
                                 "/completar-perfil",
-
                                 // OAuth Google
                                 "/oauth2/**",
                                 "/login/oauth2/**"

@@ -97,11 +97,15 @@
                         <span th:text="#{register.document.label}">Número de cédula</span>
                     </label>
 
+
                     <input type="text"
                            id="documento"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
                            th:placeholder="#{register.document.placeholder}"
                            placeholder="1234567890"
                            required>
+
                 </div>
 
                 <div class="input-group">
@@ -125,6 +129,8 @@
 
                     <input type="text"
                            id="telefono"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
                            th:placeholder="#{register.phone.placeholder}"
                            placeholder="3XXXXXXXXX"
                            required>

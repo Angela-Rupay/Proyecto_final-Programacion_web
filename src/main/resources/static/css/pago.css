@@ -307,7 +307,7 @@ body{
     margin: 0 0 18px;
     padding: 12px 14px;
     border-radius: 14px;
-    background: rgba(214, 168, 79, 0.12);
+    background: var(--color-principal);
     color: #fff;
     line-height: 1.45;
     font-size: 0.92rem;

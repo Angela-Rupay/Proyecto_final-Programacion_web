@@ -88,6 +88,8 @@
 
                     <input type="text"
                            id="documento"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
                            th:placeholder="#{completeProfile.document.placeholder}"
                            placeholder="1234567890"
                            required>
@@ -101,6 +103,8 @@
 
                     <input type="text"
                            id="telefono"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
                            th:placeholder="#{completeProfile.phone.placeholder}"
                            placeholder="3XXXXXXXXX"
                            required>

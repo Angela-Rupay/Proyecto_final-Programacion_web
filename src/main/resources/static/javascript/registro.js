@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     validarPassword();
     configurarValidaciones();
     configurarSliderSanjuanero();
+    permitirSoloNumeros(documentoInput);
+    permitirSoloNumeros(telefonoInput);
 });
 
 function configurarPassword(){
@@ -107,6 +109,14 @@ function validarFormulario(){
         /[A-Z]/.test(password) &&
         /\d/.test(password);
 
+    console.log({
+        nombreValido,
+        apellidoValido,
+        documentoValido,
+        correoValido,
+        telefonoValido,
+        passwordValido
+    });
     registerBtn.disabled = !(
         nombreValido &&
         apellidoValido &&
@@ -220,4 +230,20 @@ function configurarSliderSanjuanero() {
         const siguiente = (indice + 1) % figuras.length;
         actualizarSlider(siguiente);
     }, 3000);
+}
+function permitirSoloNumeros(input) {
+    if (!input) return;
+
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "");
+        validarFormulario();
+    });
+
+    input.addEventListener("paste", (event) => {
+        event.preventDefault();
+
+        const textoPegado = (event.clipboardData || window.clipboardData).getData("text");
+        input.value += textoPegado.replace(/\D/g, "");
+        validarFormulario();
+    });
 }

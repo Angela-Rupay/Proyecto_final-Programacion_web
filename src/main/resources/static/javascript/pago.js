@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarTotalCarrito();
     autocompletarDatosEnvio();
     configurarEdicionEnvio();
+    configurarFormatoCvv();
 });
 
 function idiomaActualPago() {
@@ -320,4 +321,11 @@ function actualizarUsuarioLocal(direccion, barrio) {
     usuario.barrio = barrio;
 
     localStorage.setItem("usuario", JSON.stringify(usuario));
+}
+function configurarFormatoCvv() {
+    cvvInput.addEventListener("input", () => {
+        let valor = cvvInput.value.replace(/\D/g, "");
+        valor = valor.substring(0, 3);
+        cvvInput.value = valor;
+    });
 }

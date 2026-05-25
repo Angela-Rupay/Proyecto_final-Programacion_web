@@ -31,8 +31,16 @@ public class UsuarioService {
 
     public ApiResponse registrarUsuario(RegistroDTO dto) {
 
+        if (usuarioRepository.existsByDocumento(dto.getDocumento())) {
+            return new ApiResponse(false, "El documento ya está registrado");
+        }
+
         if (usuarioRepository.existsByCorreo(dto.getCorreo())) {
             return new ApiResponse(false, "El correo ya está registrado");
+        }
+
+        if (usuarioRepository.existsByTelefono(dto.getTelefono())) {
+            return new ApiResponse(false, "El teléfono ya está registrado");
         }
 
         Rol rolCliente = rolRepository.findByTipoRol("CLIENTE")
@@ -111,8 +119,16 @@ public class UsuarioService {
 
     public ApiResponse registrarAdmin(RegistroDTO dto) {
 
+        if (usuarioRepository.existsByDocumento(dto.getDocumento())) {
+            return new ApiResponse(false, "El documento ya está registrado");
+        }
+
         if (usuarioRepository.existsByCorreo(dto.getCorreo())) {
             return new ApiResponse(false, "El correo ya está registrado");
+        }
+
+        if (usuarioRepository.existsByTelefono(dto.getTelefono())) {
+            return new ApiResponse(false, "El teléfono ya está registrado");
         }
 
         Rol rolAdmin = rolRepository.findByTipoRol("ADMIN")

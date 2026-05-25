@@ -83,9 +83,7 @@ body {
 
 .catalog-hero {
     padding: 4rem 8%;
-    background:
-            linear-gradient(rgba(8, 47, 58, 0.82), rgba(8, 47, 58, 0.7)),
-            url("static/images/slogan.png");
+    background: var(--color-principal);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 75%;

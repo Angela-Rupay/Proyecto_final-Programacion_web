@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     configurarSliderSanjuanero();
     cargarDatosGoogle();
     configurarValidacionesCompletarPerfil();
+    permitirSoloNumeros(documentoInput);
+    permitirSoloNumeros(telefonoInput);
 });
 
 function cargarDatosGoogle() {
@@ -184,4 +186,21 @@ function configurarSliderSanjuanero() {
         const siguiente = (indice + 1) % figuras.length;
         actualizarSlider(siguiente);
     }, 3000);
+}
+
+function permitirSoloNumeros(input) {
+    if (!input) return;
+
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "");
+        validarFormularioCompletarPerfil();
+    });
+
+    input.addEventListener("paste", (event) => {
+        event.preventDefault();
+
+        const textoPegado = (event.clipboardData || window.clipboardData).getData("text");
+        input.value += textoPegado.replace(/\D/g, "");
+        validarFormularioCompletarPerfil();
+    });
 }
