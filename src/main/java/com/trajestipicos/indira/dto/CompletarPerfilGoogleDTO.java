@@ -1,5 +1,12 @@
 package com.trajestipicos.indira.dto;
-
+/**
+ * DTO utilizado para completar el perfil de un usuario autenticado mediante Google.
+ * <p>
+ * Contiene la información adicional requerida por el sistema, como documento,
+ * teléfono y los datos básicos obtenidos desde la cuenta de Google.
+ * </p>
+ *  @author Angela Sofía Rupay Aros
+ */
 public class CompletarPerfilGoogleDTO {
 
     private Long documento;

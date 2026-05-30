@@ -5,19 +5,42 @@ import com.trajestipicos.indira.dto.PagoDTO;
 import org.springframework.stereotype.Service;
 import com.trajestipicos.indira.model.Usuario;
 import com.trajestipicos.indira.repository.UsuarioRepository;
-
+/**
+ * Servicio encargado de validar y procesar el pago simulado de una compra.
+ * <p>
+ * Este servicio no se conecta con una pasarela de pago real. Su función es
+ * validar los datos básicos ingresados por el cliente, actualizar la información
+ * de entrega y delegar el registro final de la compra al servicio de ventas.
+ * </p>
+ *  @author Angela Sofía Rupay Aros
+ */
 @Service
 public class PagoService {
 
     private final VentaService ventaService;
     private final UsuarioRepository usuarioRepository;
-
+    /**
+     * Crea el servicio de pago.
+     *
+     * @param ventaService servicio encargado de registrar la venta final.
+     * @param usuarioRepository repositorio utilizado para consultar y actualizar datos del usuario.
+     */
     public PagoService(VentaService ventaService, UsuarioRepository usuarioRepository) {
         this.ventaService = ventaService;
         this.usuarioRepository = usuarioRepository;
     }
 
-
+    /**
+     * Procesa la información del pago simulado.
+     * <p>
+     * Valida documento, titular, número de tarjeta, fecha de vencimiento, CVV,
+     * dirección y barrio. Si los datos son correctos, actualiza la información de
+     * entrega del usuario y ejecuta la compra del carrito.
+     * </p>
+     *
+     * @param dto datos ingresados por el cliente en el formulario de pago.
+     * @return respuesta indicando si la compra fue completada correctamente.
+     */
     public ApiResponse procesarPago(PagoDTO dto) {
 
         if (dto.getDocumento() == null) {

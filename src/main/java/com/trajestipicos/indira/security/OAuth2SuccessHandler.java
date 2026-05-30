@@ -14,13 +14,29 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
-
+/**
+ * Manejador ejecutado cuando un inicio de sesión con Google OAuth2 finaliza de
+ * forma exitosa.
+ * <p>
+ * Su función es identificar si el correo de Google ya pertenece a un usuario
+ * registrado. Si el usuario existe, se genera un token JWT y se redirige a una
+ * vista intermedia que guarda la sesión en el navegador. Si no existe, se
+ * redirige al formulario de completar perfil.
+ * </p>
+ *  @author Angela Sofía Rupay Aros
+ */
 @Component
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final UsuarioRepository usuarioRepository;
     private final JwtService jwtService;
 
+    /**
+     * Crea el manejador de autenticación OAuth2.
+     *
+     * @param usuarioRepository repositorio utilizado para buscar usuarios por correo.
+     * @param jwtService servicio utilizado para generar el token JWT del usuario autenticado.
+     */
     public OAuth2SuccessHandler(
             UsuarioRepository usuarioRepository,
             JwtService jwtService
@@ -28,7 +44,21 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         this.usuarioRepository = usuarioRepository;
         this.jwtService = jwtService;
     }
-
+    /**
+     * Procesa la respuesta exitosa de Google después de autenticar al usuario.
+     * <p>
+     * Se extraen los datos principales del perfil de Google, como correo, nombre
+     * y apellido. Si el correo ya existe en el sistema, se genera un JWT y se
+     * redirige a {@code /oauth-success}. Si no existe, se envían los datos
+     * disponibles a {@code /completar-perfil} para finalizar el registro.
+     * </p>
+     *
+     * @param request petición HTTP original.
+     * @param response respuesta HTTP usada para redireccionar al usuario.
+     * @param authentication objeto de autenticación entregado por Spring Security.
+     * @throws IOException si ocurre un error al redireccionar.
+     * @throws ServletException si ocurre un error durante el procesamiento de la autenticación.
+     */
     @Override
     public void onAuthenticationSuccess(
             HttpServletRequest request,
@@ -82,7 +112,13 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         response.sendRedirect(redirectUrl);
     }
-
+    /**
+     * Codifica valores enviados por URL para evitar problemas con espacios,
+     * acentos o caracteres especiales.
+     *
+     * @param value valor que será enviado como parámetro en la URL.
+     * @return valor codificado en UTF-8.
+     */
     private String encode(String value) {
         if (value == null) {
             return "";

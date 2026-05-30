@@ -9,11 +9,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuración principal de seguridad de la aplicación.
+ * <p>
+ * Esta clase define las reglas de acceso a las vistas y a las APIs REST del
+ * sistema, integrando autenticación por JWT, autorización por roles y soporte
+ * para inicio de sesión con Google OAuth2.
+ * </p>
+ *  @author Angela Sofía Rupay Aros
+ */
+
 @Configuration
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
+
+    /**
+     * Crea la configuración de seguridad con los componentes necesarios para
+     * validar tokens JWT y procesar autenticaciones exitosas mediante OAuth2.
+     *
+     * @param jwtAuthenticationFilter filtro encargado de validar los tokens JWT.
+     * @param oauth2SuccessHandler manejador ejecutado cuando el inicio de sesión con Google es exitoso.
+     */
 
     public SecurityConfig(
             JwtAuthenticationFilter jwtAuthenticationFilter,
@@ -22,6 +40,19 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.oauth2SuccessHandler = oauth2SuccessHandler;
     }
+
+    /**
+     * Define la cadena de filtros y reglas de autorización de Spring Security.
+     * <p>
+     * Las vistas HTML se dejan públicas para permitir que el navegador pueda
+     * cargarlas normalmente. La protección real se aplica sobre las APIs REST,
+     * donde se exige token JWT y rol según el tipo de operación.
+     * </p>
+     *
+     * @param http objeto de configuración de seguridad HTTP.
+     * @return cadena de filtros de seguridad configurada.
+     * @throws Exception si ocurre un error al construir la configuración.
+     */
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -108,12 +139,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                /*
-                 * OAuth2 con Google.
-                 * Por ahora, solo redirigimos al catálogo cuando Google responda bien.
-                 * Más adelante cambiaremos esto por un SuccessHandler personalizado
-                 * para decidir si va a catálogo o a completar-perfil.
-                 */
+
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(oauth2SuccessHandler)
                 )
@@ -138,6 +164,16 @@ public class SecurityConfig {
 
                 .build();
     }
+
+    /**
+     * Define el mecanismo de cifrado de contraseñas utilizado por la aplicación.
+     * <p>
+     * Se emplea BCrypt con fuerza 12 para almacenar las contraseñas de forma
+     * segura en la base de datos.
+     * </p>
+     *
+     * @return codificador de contraseñas BCrypt.
+     */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
